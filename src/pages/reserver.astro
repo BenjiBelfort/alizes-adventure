@@ -1,4 +1,5 @@
 ---
+// src/pages/reserver.astro
 import PageLayout from "../layouts/PageLayout.astro";
 import BookingCalendar from "../components/BookingCalendar";
 ---
@@ -10,8 +11,19 @@ import BookingCalendar from "../components/BookingCalendar";
   heroSubtitle="Choisissez votre date, votre créneau et le nombre de personnes."
   heroImage="/images/hero-mangrove.webp"
 >
-  <section id="reservation" class="relative z-20">
-    <BookingCalendar client:load />
+  <section id="reservation" class="relative isolate z-40 scroll-mt-28">
+    <BookingCalendar client:only="react">
+      <div slot="fallback" class="grid py-16">
+        <div class="rounded-[28px] border border-slate-900/10 bg-white p-6 text-center shadow-2xl shadow-slate-900/10">
+          <p class="font-black text-teal-700">
+            Chargement du calendrier de réservation…
+          </p>
+          <p class="mt-2 text-sm text-slate-500">
+            On prépare les bateaux, les dates, et deux-trois noix de coco.
+          </p>
+        </div>
+      </div>
+    </BookingCalendar>
   </section>
 
   <section class="mx-auto max-w-3xl py-20 text-center">

@@ -254,8 +254,8 @@ export default function BookingCalendar() {
   }
 
   return (
-    <section className="relative z-30 grid min-w-0 gap-6 py-10 md:gap-8 md:py-20">
-      <div className="relative z-30 min-w-0 rounded-[28px] border border-slate-900/10 bg-white p-4 shadow-2xl shadow-slate-900/10 sm:p-6 lg:p-8">
+    <section className="relative z-30 grid min-w-0 pointer-events-auto gap-6 py-10 md:gap-8 md:py-20">
+      <div className="relative z-30 min-w-0 rounded-3xl border border-slate-900/10 bg-white p-4 shadow-2xl shadow-slate-900/10 sm:p-6 lg:p-8">
         <div className="max-w-3xl">
           <p className="mb-3 text-xs font-black uppercase tracking-[0.14em] text-teal-600">
             Réservation démo
@@ -394,7 +394,7 @@ export default function BookingCalendar() {
               })}
             </div>
 
-            <div className="mt-4 flex flex-wrap gap-3 text-xs font-bold text-slate-500">
+            <div className="mt-4 flex flex-wrap items-center justify-center gap-3 text-center text-xs font-bold text-slate-500">
               <span className="inline-flex items-center gap-2">
                 <span className="size-2 rounded-full bg-amber-400" />
                 Matin

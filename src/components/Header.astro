@@ -10,43 +10,18 @@ const navItems = [
 const currentPath = Astro.url.pathname.replace(/\/$/, "") || "/";
 ---
 
-<header
-  class="fixed left-1/2 top-0 z-50 w-[min(calc(100%-2rem),1120px)] -translate-x-1/2 py-4"
->
+<header id="site-header" class="relative z-50 h-0 overflow-visible">
+  <!-- Barre mobile : uniquement la vraie pilule visible -->
   <div
-    class="flex items-center justify-between gap-4 rounded-full bg-slate-950/20 px-3 py-2 backdrop-blur-xl lg:bg-transparent lg:px-0 lg:py-0 lg:backdrop-blur-none"
+    class="fixed left-4 right-4 top-4 z-50 flex items-center justify-between gap-4 rounded-full bg-slate-950/20 px-3 py-2 backdrop-blur-xl lg:hidden"
   >
     <a href="/" class="shrink-0" aria-label="Accueil Alizés Adventure">
       <img
         src="/images/logo-alizes-adventure.webp"
         alt="Alizés Adventure"
-        class="h-auto w-36 drop-shadow-2xl sm:w-40 lg:w-47.5"
+        class="h-auto w-36 drop-shadow-2xl sm:w-40"
       />
     </a>
-
-    <nav
-      class="hidden items-center gap-6 rounded-full bg-slate-950/25 px-4 py-2.5 backdrop-blur-xl lg:flex"
-      aria-label="Navigation principale"
-    >
-      {
-        navItems.map((item) => {
-          const href = item.href.replace(/\/$/, "") || "/";
-          const isActive = href === currentPath;
-
-          return (
-            <a
-              href={item.href}
-              class:list={[
-                "text-sm font-extrabold text-white no-underline opacity-85 transition hover:text-yellow-300 hover:opacity-100",
-                { "text-yellow-300 opacity-100": isActive },
-              ]}
-            >
-              {item.label}
-            </a>
-          );
-        })
-      }
-    </nav>
 
     <div class="flex items-center gap-2">
       <a
@@ -58,62 +33,128 @@ const currentPath = Astro.url.pathname.replace(/\/$/, "") || "/";
 
       <button
         type="button"
-        class="inline-flex size-10 items-center justify-center rounded-full bg-white/15 text-white backdrop-blur-xl transition hover:bg-white/25 lg:hidden"
+        class="inline-flex size-10 items-center justify-center rounded-full bg-white/15 text-white backdrop-blur-xl transition hover:bg-white/25"
         aria-label="Ouvrir le menu"
         aria-expanded="false"
         aria-controls="mobile-menu"
         data-menu-button
       >
         <span class="relative block h-4 w-5">
-          <span class="absolute left-0 top-0 h-0.5 w-5 rounded-full bg-current transition" data-menu-line></span>
-          <span class="absolute left-0 top-1.5 h-0.5 w-5 rounded-full bg-current transition" data-menu-line></span>
-          <span class="absolute left-0 top-3 h-0.5 w-5 rounded-full bg-current transition" data-menu-line></span>
+          <span
+            class="absolute left-0 top-0 h-0.5 w-5 rounded-full bg-current transition"
+            data-menu-line
+          ></span>
+          <span
+            class="absolute left-0 top-1.5 h-0.5 w-5 rounded-full bg-current transition"
+            data-menu-line
+          ></span>
+          <span
+            class="absolute left-0 top-3 h-0.5 w-5 rounded-full bg-current transition"
+            data-menu-line
+          ></span>
         </span>
       </button>
     </div>
   </div>
 
-  <nav
-    id="mobile-menu"
-    class="pointer-events-none mt-3 origin-top scale-95 rounded-3xl bg-slate-950/85 p-3 opacity-0 shadow-2xl backdrop-blur-xl transition lg:hidden"
-    aria-label="Navigation mobile"
-    data-mobile-menu
+  <!-- Logo desktop : seulement la taille du logo -->
+  <a
+    href="/"
+    class="fixed top-4 z-50 hidden shrink-0 lg:left-[max(1rem,calc((100vw-1120px)/2))] lg:block"
+    aria-label="Accueil Alizés Adventure"
   >
-    <div class="flex flex-col gap-1">
-      {
-        navItems.map((item) => {
-          const href = item.href.replace(/\/$/, "") || "/";
-          const isActive = href === currentPath;
+    <img
+      src="/images/logo-alizes-adventure.webp"
+      alt="Alizés Adventure"
+      class="h-auto lg:w-47.5 drop-shadow-2xl"
+    />
+  </a>
 
-          return (
-            <a
-              href={item.href}
-              class:list={[
-                "rounded-2xl px-4 py-3 text-sm font-extrabold text-white no-underline opacity-85 transition hover:bg-white/10 hover:text-yellow-300 hover:opacity-100",
-                { "bg-white/10 text-yellow-300 opacity-100": isActive },
-              ]}
-            >
-              {item.label}
-            </a>
-          );
-        })
-      }
-    </div>
+  <!-- Navigation desktop : seulement la taille de la nav -->
+  <nav
+    class="fixed left-1/2 top-4 z-50 hidden -translate-x-1/2 items-center gap-6 rounded-full bg-slate-950/25 px-4 py-2.5 backdrop-blur-xl lg:flex"
+    aria-label="Navigation principale"
+  >
+    {
+      navItems.map((item) => {
+        const href = item.href.replace(/\/$/, "") || "/";
+        const isActive = href === currentPath;
+
+        return (
+          <a
+            href={item.href}
+            class:list={[
+              "text-sm font-extrabold text-white no-underline opacity-85 transition hover:text-yellow-300 hover:opacity-100",
+              { "text-yellow-300 opacity-100": isActive },
+            ]}
+          >
+            {item.label}
+          </a>
+        );
+      })
+    }
   </nav>
+
+  <!-- Bouton réserver desktop : seulement la taille du bouton -->
+  <a
+    href="/reserver#reservation"
+    class="fixed top-4 z-50 hidden min-h-11 items-center justify-center rounded-full bg-yellow-300 px-5 py-2 text-sm font-black text-slate-950 no-underline shadow-xl transition hover:-translate-y-0.5 hover:bg-yellow-200 lg:right-[max(1rem,calc((100vw-1120px)/2))] lg:inline-flex"
+  >
+    Réserver
+  </a>
 </header>
+
+<!-- Menu mobile indépendant : hidden = il n'existe pas -->
+<nav
+  id="mobile-menu"
+  class="fixed left-4 right-4 top-24 z-50 hidden origin-top scale-95 rounded-3xl bg-slate-950/85 p-3 opacity-0 shadow-2xl backdrop-blur-xl transition lg:hidden"
+  aria-label="Navigation mobile"
+  data-mobile-menu
+>
+  <div class="flex flex-col gap-1">
+    {
+      navItems.map((item) => {
+        const href = item.href.replace(/\/$/, "") || "/";
+        const isActive = href === currentPath;
+
+        return (
+          <a
+            href={item.href}
+            class:list={[
+              "rounded-2xl px-4 py-3 text-sm font-extrabold text-white no-underline opacity-85 transition hover:bg-white/10 hover:text-yellow-300 hover:opacity-100",
+              { "bg-white/10 text-yellow-300 opacity-100": isActive },
+            ]}
+          >
+            {item.label}
+          </a>
+        );
+      })
+    }
+  </div>
+</nav>
 
 <script>
   const button = document.querySelector("[data-menu-button]");
   const menu = document.querySelector("[data-mobile-menu]");
   const lines = document.querySelectorAll("[data-menu-line]");
 
+  let closeTimeout: number | undefined;
+
   const closeMenu = () => {
     if (!button || !menu) return;
 
     button.setAttribute("aria-expanded", "false");
 
-    menu.classList.add("pointer-events-none", "scale-95", "opacity-0");
-    menu.classList.remove("pointer-events-auto", "scale-100", "opacity-100");
+    menu.classList.remove("scale-100", "opacity-100");
+    menu.classList.add("scale-95", "opacity-0");
+
+    if (closeTimeout) {
+      window.clearTimeout(closeTimeout);
+    }
+
+    closeTimeout = window.setTimeout(() => {
+      menu.classList.add("hidden");
+    }, 200);
 
     lines[0]?.classList.remove("top-1.5", "rotate-45");
     lines[1]?.classList.remove("opacity-0");
@@ -128,8 +169,16 @@ const currentPath = Astro.url.pathname.replace(/\/$/, "") || "/";
 
     button.setAttribute("aria-expanded", "true");
 
-    menu.classList.remove("pointer-events-none", "scale-95", "opacity-0");
-    menu.classList.add("pointer-events-auto", "scale-100", "opacity-100");
+    if (closeTimeout) {
+      window.clearTimeout(closeTimeout);
+    }
+
+    menu.classList.remove("hidden");
+
+    requestAnimationFrame(() => {
+      menu.classList.remove("scale-95", "opacity-0");
+      menu.classList.add("scale-100", "opacity-100");
+    });
 
     lines[0]?.classList.remove("top-0");
     lines[2]?.classList.remove("top-3");

@@ -1,3 +1,5 @@
+import type { ReactNode } from "react";
+
 type Slot = {
   id: string;
   date: string;
@@ -14,13 +16,18 @@ type Props = {
   canBook: boolean;
 };
 
+function parseDateKey(dateKey: string) {
+  const [year, month, day] = dateKey.split("-").map(Number);
+  return new Date(year, month - 1, day);
+}
+
 function formatDate(date: string) {
   return new Intl.DateTimeFormat("fr-FR", {
     weekday: "long",
     day: "numeric",
     month: "long",
     year: "numeric",
-  }).format(new Date(date));
+  }).format(parseDateKey(date));
 }
 
 const inputClass =
@@ -28,7 +35,7 @@ const inputClass =
 
 const labelClass = "grid gap-2 font-black text-slate-950";
 
-function RequiredText({ children }: { children: React.ReactNode }) {
+function RequiredText({ children }: { children: ReactNode }) {
   return (
     <span>
       {children} <span className="text-red-600" aria-hidden="true">*</span>
@@ -44,122 +51,122 @@ export default function BookingForm({
   canBook,
 }: Props) {
   return (
-  <form
-    className="grid grid-cols-[0.9fr_1.1fr] gap-7 rounded-4xl border border-slate-900/10 bg-white p-8 shadow-2xl shadow-slate-900/10 max-lg:grid-cols-1 max-md:p-6"
-    onSubmit={(event) => {
-      event.preventDefault();
-      alert("Démo : la réservation sera branchée ensuite à Supabase.");
-    }}
-  >
-    <div className="rounded-3xl bg-slate-950 p-6 text-white">
-      <p className="mb-3 text-xs font-black uppercase tracking-[0.14em] text-teal-300">
-        Confirmation
-      </p>
+    <form
+      className="grid min-w-0 grid-cols-[0.9fr_1.1fr] gap-6 rounded-3xl border border-slate-900/10 bg-white p-4 shadow-2xl shadow-slate-900/10 sm:p-6 lg:grid-cols-[0.9fr_1.1fr] lg:p-8 max-lg:grid-cols-1"
+      onSubmit={(event) => {
+        event.preventDefault();
+        alert("Démo : la réservation sera branchée ensuite à Supabase.");
+      }}
+    >
+      <div className="rounded-3xl bg-slate-950 p-5 text-white sm:p-6 lg:p-7">
+        <p className="mb-3 text-xs font-black uppercase tracking-[0.14em] text-teal-300">
+          Confirmation
+        </p>
 
-      <h2 className="font-['Baloo_2'] text-[clamp(2.2rem,4vw,4rem)] font-extrabold leading-none">
-        Dernière étape
-      </h2>
+        <h2 className="font-['Baloo_2'] text-[clamp(2.2rem,4vw,4rem)] font-extrabold leading-none">
+          Dernière étape
+        </h2>
 
-      <p className="mt-4 leading-relaxed text-white/65">
-        Vérifiez votre sortie, laissez vos coordonnées, et la demande partira
-        au capitaine.
-      </p>
+        <p className="mt-4 leading-relaxed text-white/65">
+          Vérifiez votre sortie, laissez vos coordonnées, et la demande partira
+          au capitaine.
+        </p>
 
-      {slot ? (
-        <div className="mt-6 grid gap-3 rounded-2xl bg-white/10 p-5">
-          <div>
-            <p className="mb-1 text-sm font-bold text-white/50">Date</p>
-            <strong className="capitalize text-white">
-              {formatDate(slot.date)}
-            </strong>
+        {slot ? (
+          <div className="mt-6 grid gap-3 rounded-2xl bg-white/10 p-4 sm:p-5">
+            <div>
+              <p className="mb-1 text-sm font-bold text-white/50">Date</p>
+              <strong className="capitalize text-white">
+                {formatDate(slot.date)}
+              </strong>
+            </div>
+
+            <div>
+              <p className="mb-1 text-sm font-bold text-white/50">Créneau</p>
+              <strong className="text-white">{slot.label}</strong>
+            </div>
+
+            <div>
+              <p className="mb-1 text-sm font-bold text-white/50">
+                Participants
+              </p>
+              <strong className="text-white">
+                {passengers} personne(s) • {boatsNeeded} bateau(x)
+              </strong>
+            </div>
           </div>
-
-          <div>
-            <p className="mb-1 text-sm font-bold text-white/50">Créneau</p>
-            <strong className="text-white">{slot.label}</strong>
+        ) : (
+          <div className="mt-6 rounded-2xl bg-white/10 p-4 sm:p-5">
+            Sélectionnez un créneau.
           </div>
-
-          <div>
-            <p className="mb-1 text-sm font-bold text-white/50">
-              Participants
-            </p>
-            <strong className="text-white">
-              {passengers} personne(s) • {boatsNeeded} bateau(x)
-            </strong>
-          </div>
-        </div>
-      ) : (
-        <div className="mt-6 rounded-2xl bg-white/10 p-5">
-          Sélectionnez un créneau.
-        </div>
-      )}
-    </div>
-
-    <div className="grid gap-5">
-      <div className="grid grid-cols-2 gap-4 max-md:grid-cols-1">
-        <label className={labelClass}>
-          <RequiredText>Prénom</RequiredText>
-          <input className={inputClass} name="firstname" type="text" required />
-        </label>
-
-        <label className={labelClass}>
-          <RequiredText>Nom</RequiredText>
-          <input className={inputClass} name="lastname" type="text" required />
-        </label>
-
-        <label className={labelClass}>
-          <RequiredText>E-mail</RequiredText>
-          <input className={inputClass} name="email" type="email" required />
-        </label>
-
-        <label className={labelClass}>
-          <RequiredText>Téléphone</RequiredText>
-          <input className={inputClass} name="phone" type="tel" required />
-        </label>
+        )}
       </div>
 
-      <label className={labelClass}>
-        Message optionnel
-        <textarea
-          className={inputClass}
-          name="message"
-          rows={5}
-          placeholder="Une précision, une question, une demande spéciale ?"
-        ></textarea>
-      </label>
+      <div className="grid min-w-0 gap-5">
+        <div className="grid grid-cols-2 gap-4 max-md:grid-cols-1">
+          <label className={labelClass}>
+            <RequiredText>Prénom</RequiredText>
+            <input className={inputClass} name="firstname" type="text" required />
+          </label>
 
-      <label className="flex items-start gap-3 font-semibold text-slate-700">
-        <input
-          className="mt-1 size-4 accent-teal-600"
-          name="cgv"
-          type="checkbox"
-          required
-        />
-        <span>
-          J’ai lu et j’accepte les conditions générales de réservation{" "}
-          <span className="text-red-600" aria-hidden="true">*</span>
-          <span className="sr-only"> obligatoire</span>
-        </span>
-      </label>
+          <label className={labelClass}>
+            <RequiredText>Nom</RequiredText>
+            <input className={inputClass} name="lastname" type="text" required />
+          </label>
 
-      <p className="-mt-2 text-sm text-slate-500">
-        <span className="text-red-600">*</span> Champs obligatoires
-      </p>
+          <label className={labelClass}>
+            <RequiredText>E-mail</RequiredText>
+            <input className={inputClass} name="email" type="email" required />
+          </label>
 
-      <button
-        className="inline-flex min-h-14 w-full items-center justify-center rounded-full bg-teal-500 px-8 py-4 text-lg font-black text-white shadow-2xl shadow-teal-700/20 transition hover:-translate-y-0.5 hover:bg-teal-600 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:translate-y-0"
-        type="submit"
-        disabled={!canBook}
-      >
-        Envoyer ma demande de réservation
-      </button>
+          <label className={labelClass}>
+            <RequiredText>Téléphone</RequiredText>
+            <input className={inputClass} name="phone" type="tel" required />
+          </label>
+        </div>
 
-      {!canBook && (
-        <p className="m-0 text-sm text-slate-500">
-          Ce créneau ne peut pas accueillir ce nombre de personnes.
+        <label className={labelClass}>
+          Message optionnel
+          <textarea
+            className={inputClass}
+            name="message"
+            rows={5}
+            placeholder="Une précision, une question, une demande spéciale ?"
+          ></textarea>
+        </label>
+
+        <label className="flex items-start gap-3 font-semibold text-slate-700">
+          <input
+            className="mt-1 size-4 shrink-0 accent-teal-600"
+            name="cgv"
+            type="checkbox"
+            required
+          />
+          <span>
+            J’ai lu et j’accepte les conditions générales de réservation{" "}
+            <span className="text-red-600" aria-hidden="true">*</span>
+            <span className="sr-only"> obligatoire</span>
+          </span>
+        </label>
+
+        <p className="-mt-2 text-sm text-slate-500">
+          <span className="text-red-600">*</span> Champs obligatoires
         </p>
-      )}
-    </div>
-  </form>
-);
+
+        <button
+          className="inline-flex min-h-14 w-full cursor-pointer touch-manipulation items-center justify-center rounded-full bg-teal-500 px-8 py-4 text-lg font-black text-white shadow-2xl shadow-teal-700/20 transition hover:-translate-y-0.5 hover:bg-teal-600 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:translate-y-0"
+          type="submit"
+          disabled={!canBook}
+        >
+          Envoyer ma demande de réservation
+        </button>
+
+        {!canBook && (
+          <p className="m-0 text-sm text-slate-500">
+            Ce créneau ne peut pas accueillir ce nombre de personnes.
+          </p>
+        )}
+      </div>
+    </form>
+  );
 }

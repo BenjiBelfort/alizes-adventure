@@ -1,0 +1,454 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout
+  title="Réservation envoyée — Alizés Adventure"
+  description="Exemple de confirmation après une demande de réservation Alizés Adventure."
+>
+  <main class="relative z-10 mx-auto w-[min(calc(100%-1rem),1120px)] py-10 sm:py-14">
+    <section class="relative z-40">
+      <div class="mx-auto max-w-5xl">
+        <header class="mb-8 rounded-4xl border border-slate-900/10 bg-white p-6 shadow-2xl shadow-slate-900/10 sm:p-8 lg:p-10">
+          <p class="mb-3 text-xs font-black uppercase tracking-[0.14em] text-teal-600">
+            Note de développement
+          </p>
+
+          <h1 class="font-['Baloo_2'] text-[clamp(2.8rem,7vw,6rem)] font-extrabold leading-none text-slate-950">
+            Réservation envoyée !
+          </h1>
+
+          <p class="mt-5 max-w-3xl text-lg font-semibold leading-relaxed text-slate-600">
+            Dans la version finale, le client et toi recevez automatiquement un
+            e-mail après validation du formulaire.
+          </p>
+
+          <p class="mt-4 max-w-3xl leading-relaxed text-slate-500">
+            Cette page simule la suite du parcours de réservation : un e-mail
+            de confirmation clair pour le client, et un récapitulatif pratique
+            pour gérer la sortie côté Alizés Adventure.
+          </p>
+
+          <div class="mt-8 grid gap-4 rounded-3xl bg-slate-50 p-5 sm:grid-cols-3">
+            <div>
+              <p class="text-sm font-bold text-slate-500">Client</p>
+              <p class="mt-1 font-black text-slate-950">
+                <span data-field="firstname">Client</span>
+                <span data-field="lastname"></span>
+              </p>
+            </div>
+
+            <div>
+              <p class="text-sm font-bold text-slate-500">Date choisie</p>
+              <p
+                class="mt-1 font-black capitalize text-slate-950"
+                data-field="formattedDate"
+              >
+                —
+              </p>
+            </div>
+
+            <div>
+              <p class="text-sm font-bold text-slate-500">Montant estimé</p>
+              <p class="mt-1 font-black text-teal-700" data-field="formattedPrice">
+                —
+              </p>
+            </div>
+          </div>
+        </header>
+
+        <div class="grid gap-8 lg:grid-cols-2">
+          <!-- EMAIL CLIENT -->
+          <article class="overflow-hidden rounded-4xl border border-teal-500/20 bg-white shadow-2xl shadow-slate-900/10">
+            <div class="relative overflow-hidden bg-linear-to-br from-teal-50 via-cyan-50 to-amber-50 p-6 sm:p-8">
+              <div class="absolute -right-16 -top-16 size-44 rounded-full bg-teal-300/20"></div>
+              <div class="absolute -bottom-20 -left-16 size-52 rounded-full bg-amber-300/25"></div>
+
+              <div class="relative">
+                <p class="mb-3 text-xs font-black uppercase tracking-[0.14em] text-teal-700">
+                  E-mail client
+                </p>
+
+                <h2 class="font-['Baloo_2'] text-4xl font-extrabold leading-none text-slate-950">
+                  Votre demande est bien partie
+                </h2>
+
+                <p class="mt-4 max-w-md font-semibold leading-relaxed text-slate-600">
+                  Un message rassurant, chaleureux, avec le résumé complet et
+                  les infos utiles avant l’excursion.
+                </p>
+              </div>
+            </div>
+
+            <div class="grid gap-6 p-6 sm:p-8">
+              <div class="rounded-2xl border border-teal-500/20 bg-teal-50 p-5">
+                <p class="text-sm font-bold text-teal-700">Objet</p>
+                <p class="mt-1 font-black text-slate-950">
+                  Votre demande de réservation Alizés Adventure
+                </p>
+              </div>
+
+              <div class="prose prose-slate max-w-none">
+                <p>
+                  Bonjour <strong data-field="firstname">Client</strong>,
+                </p>
+
+                <p>
+                  Merci pour votre demande de réservation avec
+                  <strong> Alizés Adventure</strong>. Votre demande a bien été
+                  transmise à l’équipe.
+                </p>
+
+                <p>
+                  Il ne reste plus qu’à préparer la casquette, la crème solaire,
+                  et l’envie de découvrir la mangrove.
+                </p>
+
+                <div class="not-prose my-6 rounded-3xl border border-teal-500/20 bg-teal-50 p-5">
+                  <p class="mb-3 text-sm font-black uppercase tracking-[0.14em] text-teal-700">
+                    Résumé de votre sortie
+                  </p>
+
+                  <dl class="grid gap-3 text-sm">
+                    <div class="grid gap-1">
+                      <dt class="font-bold text-slate-500">Date</dt>
+                      <dd
+                        class="font-black capitalize text-slate-950"
+                        data-field="formattedDate"
+                      >
+                        —
+                      </dd>
+                    </div>
+
+                    <div class="grid gap-1">
+                      <dt class="font-bold text-slate-500">Créneau</dt>
+                      <dd class="font-black text-slate-950" data-field="slotLabel">
+                        —
+                      </dd>
+                    </div>
+
+                    <div class="grid gap-1">
+                      <dt class="font-bold text-slate-500">Participants</dt>
+                      <dd
+                        class="font-black text-slate-950"
+                        data-field="passengerSummary"
+                      >
+                        —
+                      </dd>
+                    </div>
+
+                    <div class="grid gap-1">
+                      <dt class="font-bold text-slate-500">
+                        Prix à payer au départ
+                      </dt>
+                      <dd
+                        class="font-black text-teal-700"
+                        data-field="formattedPrice"
+                      >
+                        —
+                      </dd>
+                    </div>
+                  </dl>
+                </div>
+
+                <p>
+                  Le règlement se fera au départ de l’excursion, en espèces ou
+                  par chèque.
+                </p>
+
+                <p>
+                  Le départ se fait depuis le port de Sainte-Rose, à la cabane
+                  violette.
+                </p>
+
+                <div class="not-prose my-6 overflow-hidden rounded-3xl border border-slate-900/10 bg-white shadow-xl shadow-slate-900/10">
+                  <img
+                    src="/images/accueil-depart.webp"
+                    alt="Cabane violette au départ de l’excursion Alizés Adventure à Sainte-Rose"
+                    class="aspect-4/3 w-full object-cover"
+                    loading="lazy"
+                  />
+
+                  <div class="p-4">
+                    <p class="text-sm font-black text-slate-950">
+                      Point de rendez-vous
+                    </p>
+                    <p class="mt-1 text-sm font-semibold text-slate-600">
+                      Retrouvez l’équipe à la cabane violette sur le port de
+                      Sainte-Rose.
+                    </p>
+                  </div>
+                </div>
+
+                <p>
+                  <a
+                    href="https://www.google.com/maps/search/?api=1&query=Port+de+Sainte-Rose+Guadeloupe"
+                    target="_blank"
+                    rel="noreferrer"
+                    class="font-black text-teal-700 underline decoration-teal-500/30 underline-offset-4"
+                  >
+                    Voir l’itinéraire sur Google Maps
+                  </a>
+                </p>
+
+                <div class="not-prose my-6 rounded-3xl border border-amber-400/30 bg-amber-50 p-5">
+                  <p class="mb-3 font-black text-slate-950">
+                    À prévoir pour profiter de la sortie :
+                  </p>
+
+                  <ul class="grid gap-2 text-sm font-semibold text-slate-700">
+                    <li>• Crème solaire</li>
+                    <li>• Casquette ou chapeau</li>
+                    <li>• Tour de cou ou protection légère</li>
+                    <li>• Lunettes de soleil</li>
+                    <li>• Bouteille d’eau</li>
+                    <li>• Tenue confortable qui ne craint pas quelques éclaboussures</li>
+                    <li>• PMT 🤿 pour les plus motivés</li>
+                  </ul>
+                </div>
+
+                <p>
+                  En cas d’empêchement ou de question, vous pourrez répondre
+                  directement à cet e-mail.
+                </p>
+
+                <p>
+                  À très bientôt sur l’eau,<br />
+                  <strong>L’équipe Alizés Adventure</strong>
+                </p>
+              </div>
+            </div>
+          </article>
+
+          <!-- EMAIL RICHARD -->
+          <article class="overflow-hidden rounded-4xl border border-slate-900/10 bg-white shadow-2xl shadow-slate-900/10">
+            <div class="bg-slate-950 p-6 text-white sm:p-8">
+              <p class="mb-3 text-xs font-black uppercase tracking-[0.14em] text-amber-300">
+                E-mail Richard
+              </p>
+
+              <h2 class="font-['Baloo_2'] text-4xl font-extrabold leading-none">
+                Nouvelle demande à traiter
+              </h2>
+
+              <p class="mt-4 text-white/65">
+                Envoyé automatiquement au gestionnaire de l’activité.
+              </p>
+            </div>
+
+            <div class="grid gap-6 p-6 sm:p-8">
+              <div class="rounded-2xl border border-slate-900/10 bg-slate-50 p-5">
+                <p class="text-sm font-bold text-slate-500">Objet</p>
+                <p class="mt-1 font-black text-slate-950">
+                  Nouvelle réservation — Alizés Adventure
+                </p>
+              </div>
+
+              <div class="rounded-3xl border border-slate-900/10 p-5">
+                <p class="mb-4 text-sm font-black uppercase tracking-[0.14em] text-teal-700">
+                  Coordonnées client
+                </p>
+
+                <dl class="grid gap-3 text-sm">
+                  <div>
+                    <dt class="font-bold text-slate-500">Nom</dt>
+                    <dd class="font-black text-slate-950">
+                      <span data-field="firstname">Client</span>
+                      <span data-field="lastname"></span>
+                    </dd>
+                  </div>
+
+                  <div>
+                    <dt class="font-bold text-slate-500">E-mail</dt>
+                    <dd class="font-black text-slate-950" data-field="email">—</dd>
+                  </div>
+
+                  <div>
+                    <dt class="font-bold text-slate-500">Téléphone</dt>
+                    <dd class="font-black text-slate-950" data-field="phone">—</dd>
+                  </div>
+                </dl>
+              </div>
+
+              <div class="rounded-3xl border border-teal-500/20 bg-teal-50 p-5">
+                <p class="mb-4 text-sm font-black uppercase tracking-[0.14em] text-teal-700">
+                  Détail réservation
+                </p>
+
+                <dl class="grid gap-3 text-sm">
+                  <div>
+                    <dt class="font-bold text-slate-500">Date</dt>
+                    <dd
+                      class="font-black capitalize text-slate-950"
+                      data-field="formattedDate"
+                    >
+                      —
+                    </dd>
+                  </div>
+
+                  <div>
+                    <dt class="font-bold text-slate-500">Créneau</dt>
+                    <dd class="font-black text-slate-950" data-field="slotLabel">
+                      —
+                    </dd>
+                  </div>
+
+                  <div>
+                    <dt class="font-bold text-slate-500">Adultes</dt>
+                    <dd class="font-black text-slate-950" data-field="adults">
+                      —
+                    </dd>
+                  </div>
+
+                  <div>
+                    <dt class="font-bold text-slate-500">Enfants</dt>
+                    <dd class="font-black text-slate-950" data-field="children">
+                      —
+                    </dd>
+                  </div>
+
+                  <div>
+                    <dt class="font-bold text-slate-500">Total participants</dt>
+                    <dd class="font-black text-slate-950" data-field="passengers">
+                      —
+                    </dd>
+                  </div>
+
+                  <div>
+                    <dt class="font-bold text-slate-500">Bateaux nécessaires</dt>
+                    <dd class="font-black text-slate-950" data-field="boatsSummary">
+                      —
+                    </dd>
+                  </div>
+
+                  <div>
+                    <dt class="font-bold text-slate-500">Montant à encaisser</dt>
+                    <dd
+                      class="font-black text-teal-700"
+                      data-field="formattedPrice"
+                    >
+                      —
+                    </dd>
+                  </div>
+                </dl>
+              </div>
+
+              <div class="rounded-3xl border border-slate-900/10 bg-slate-50 p-5">
+                <p class="mb-2 text-sm font-black uppercase tracking-[0.14em] text-slate-500">
+                  Message client
+                </p>
+
+                <p
+                  class="whitespace-pre-line text-sm font-semibold leading-relaxed text-slate-700"
+                  data-field="message"
+                >
+                  Aucun message particulier.
+                </p>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <div class="mt-10 rounded-4xl border border-slate-900/10 bg-white p-6 text-center shadow-2xl shadow-slate-900/10 sm:p-8">
+            <p class="mx-auto max-w-3xl leading-relaxed text-slate-600">
+            À cette étape, dans la version finale, la réservation serait enregistrée et le
+            calendrier serait automatiquement mis à jour : les places restantes seraient
+            recalculées, le client recevrait son e-mail de confirmation, et toi tu
+            recevrais le récapitulatif complet de la demande.
+            </p>
+
+            <p class="mx-auto mt-5 max-w-3xl text-xl font-black leading-tight text-slate-950 sm:text-2xl">
+            Voir comment tu peux créer tes créneaux et gérer les
+            réservations depuis ton interface d’administration.
+            </p>
+
+            <a
+                href="/admin"
+                class="mt-6 inline-flex min-h-14 items-center justify-center rounded-full bg-teal-500 px-8 py-4 text-lg font-black text-white shadow-2xl shadow-teal-700/20 transition hover:-translate-y-0.5 hover:bg-teal-600"
+                >
+                Voir l’interface d’administration
+            </a>
+        </div>
+      </div>
+    </section>
+  </main>
+</BaseLayout>
+
+<script is:inline>
+  const params = new URLSearchParams(window.location.search);
+
+  const data = {
+    firstname: params.get("firstname") || "Client",
+    lastname: params.get("lastname") || "",
+    email: params.get("email") || "—",
+    phone: params.get("phone") || "—",
+    message: params.get("message") || "Aucun message particulier.",
+    date: params.get("date") || "",
+    slotLabel: params.get("slotLabel") || "—",
+    adults: Number(params.get("adults") || 0),
+    children: Number(params.get("children") || 0),
+    passengers: Number(params.get("passengers") || 0),
+    boatsNeeded: Number(params.get("boatsNeeded") || 0),
+    totalPrice: Number(params.get("totalPrice") || 0),
+  };
+
+  function parseDateKey(dateKey) {
+    const [year, month, day] = dateKey.split("-").map(Number);
+    return new Date(year, month - 1, day);
+  }
+
+  function formatDate(dateKey) {
+    if (!dateKey) return "—";
+
+    return new Intl.DateTimeFormat("fr-FR", {
+      weekday: "long",
+      day: "numeric",
+      month: "long",
+      year: "numeric",
+    }).format(parseDateKey(dateKey));
+  }
+
+  function formatPrice(price) {
+    return new Intl.NumberFormat("fr-FR", {
+      style: "currency",
+      currency: "EUR",
+      maximumFractionDigits: 0,
+    }).format(price);
+  }
+
+  function formatPassengerSummary(adults, children) {
+    const adultLabel = `${adults} adulte${adults > 1 ? "s" : ""}`;
+
+    if (children <= 0) {
+      return adultLabel;
+    }
+
+    const childLabel = `${children} enfant${children > 1 ? "s" : ""}`;
+
+    return `${adultLabel} et ${childLabel}`;
+  }
+
+  function formatBoatsSummary(boatsNeeded) {
+    return `${boatsNeeded} bateau${boatsNeeded > 1 ? "x" : ""} nécessaire${
+      boatsNeeded > 1 ? "s" : ""
+    }`;
+  }
+
+  const computed = {
+    ...data,
+    formattedDate: formatDate(data.date),
+    formattedPrice: formatPrice(data.totalPrice),
+    passengerSummary: formatPassengerSummary(data.adults, data.children),
+    boatsSummary: formatBoatsSummary(data.boatsNeeded),
+  };
+
+  document.querySelectorAll("[data-field]").forEach((element) => {
+    const key = element.getAttribute("data-field");
+
+    if (!key || !(key in computed)) {
+      return;
+    }
+
+    element.textContent = computed[key];
+  });
+</script>

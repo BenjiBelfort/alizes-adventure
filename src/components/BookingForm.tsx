@@ -1,4 +1,4 @@
-import type { ReactNode } from "react";
+import type { FormEvent, ReactNode } from "react";
 
 type Slot = {
   id: string;
@@ -76,13 +76,37 @@ export default function BookingForm({
   totalPrice,
   canBook,
 }: Props) {
+  function handleSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+
+    if (!slot || !canBook) {
+      return;
+    }
+
+    const formData = new FormData(event.currentTarget);
+
+    const params = new URLSearchParams({
+      firstname: String(formData.get("firstname") || ""),
+      lastname: String(formData.get("lastname") || ""),
+      email: String(formData.get("email") || ""),
+      phone: String(formData.get("phone") || ""),
+      message: String(formData.get("message") || ""),
+      date: slot.date,
+      slotLabel: slot.label,
+      adults: String(adults),
+      children: String(children),
+      passengers: String(passengers),
+      boatsNeeded: String(boatsNeeded),
+      totalPrice: String(totalPrice),
+    });
+
+    window.location.href = `/reservation-confirmee?${params.toString()}`;
+  }
+
   return (
     <form
       className="grid min-w-0 grid-cols-[0.9fr_1.1fr] gap-6 rounded-3xl border border-slate-900/10 bg-white p-4 shadow-2xl shadow-slate-900/10 sm:p-6 lg:grid-cols-[0.9fr_1.1fr] lg:p-8 max-lg:grid-cols-1"
-      onSubmit={(event) => {
-        event.preventDefault();
-        alert("Démo : la réservation sera branchée ensuite à Supabase.");
-      }}
+      onSubmit={handleSubmit}
     >
       <div className="rounded-3xl bg-linear-to-br from-teal-950 via-slate-950 to-amber-950 p-5 text-white shadow-2xl shadow-teal-950/30 sm:p-6 lg:p-7">
         <p className="mb-3 text-xs font-black uppercase tracking-[0.14em] text-teal-300">

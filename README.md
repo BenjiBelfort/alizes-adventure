@@ -41,3 +41,8 @@ All commands are run from the root of the project, from a terminal:
 ## 👀 Want to learn more?
 
 Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+
+
+## architecture du projet :
+tree -a -L 5 -I "node_modules|.git|dist|.vercel|.astro|.vscode|.DS_Store"
+dans le terminal (régler L3 L4 L5 pour la profondeur)

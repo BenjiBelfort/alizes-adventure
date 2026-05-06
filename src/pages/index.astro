@@ -1,17 +1,357 @@
 ---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Hero from "../components/Hero.astro";
+import ImageCarousel from "../components/ImageCarousel.astro";
 
+const carouselImages = [
+  {
+    src: "/images/carrousel/01-excursion-mangrove-01.webp",
+    alt: "Bateau sans permis Alizés Adventure dans la mangrove de Guadeloupe",
+  },
+  {
+    src: "/images/carrousel/02-excursion-mangrove-02.webp",
+    alt: "Excursion guidée en bateau dans la mangrove de Sainte-Rose",
+  },
+  {
+    src: "/images/carrousel/03-excursion-mangrove-04.webp",
+    alt: "Navigation dans les eaux calmes de la mangrove en Guadeloupe",
+  },
+  {
+    src: "/images/carrousel/04-excursion-mangrove-05-2016-11.webp",
+    alt: "Paysage de mangrove et lagon pendant l’excursion Alizés Adventure",
+  },
+  {
+    src: "/images/carrousel/05-excursion-mangrove-05-2016-12.webp",
+    alt: "Bateau dans le Grand Cul-de-Sac Marin en Guadeloupe",
+  },
+  {
+    src: "/images/carrousel/06-excursion-mangrove-06.webp",
+    alt: "Découverte des palétuviers lors d’une excursion en mangrove",
+  },
+  {
+    src: "/images/carrousel/07-excursion-mangrove-09.webp",
+    alt: "Sortie nature en bateau dans la mangrove de Sainte-Rose",
+  },
+  {
+    src: "/images/carrousel/08-excursion-mangrove-11.webp",
+    alt: "Excursion Alizés Adventure entre mangrove, lagon et îlets",
+  },
+];
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<BaseLayout
+  title="Alizés Adventure — Excursion mangrove en Guadeloupe"
+  description="Excursion guidée en bateau sans permis dans la mangrove de Sainte-Rose, le lagon du Grand Cul-de-Sac Marin et les îlets de Guadeloupe."
+>
+  <Hero
+    title="Excursion dans la mangrove"
+    subtitle="Soyez acteur de votre sortie : pilotez votre bateau sans permis et suivez le guide au cœur du Grand Cul-de-Sac Marin."
+    image="/images/suivez-le-guide.webp"
+  />
+
+  <main class="mx-auto w-[min(calc(100%-2rem),1120px)]">
+    <!-- Intro -->
+    <section class="mx-auto max-w-3xl py-20 text-center lg:py-28">
+      <p class="mb-3 text-xs font-black uppercase tracking-[0.14em] text-teal-600">
+        Bienvenue à bord
+      </p>
+
+      <h2 class="font-['Baloo_2'] text-[clamp(2.2rem,4vw,4rem)] font-extrabold leading-none text-slate-950">
+        Découvrez la mangrove de Guadeloupe autrement
+      </h2>
+
+      <p class="mt-6 leading-relaxed text-slate-600">
+        Alizés Adventure vous embarque au départ du port de Sainte-Rose pour une
+        excursion guidée dans la mangrove, le lagon et les îlets du
+        Grand Cul-de-Sac Marin, au cœur d’un espace naturel exceptionnel.
+      </p>
+
+      <p class="mt-4 leading-relaxed text-slate-600">
+        À bord d’un bateau sans permis privatisé, vous suivez Richard, votre
+        guide, dans votre propre embarcation. Après le briefing, les consignes de
+        sécurité et le prêt du matériel, cap sur les eaux calmes, les
+        palétuviers, les passages secrets et les paysages turquoise.
+      </p>
+
+      <div class="mt-8 flex flex-wrap justify-center gap-3">
+        <a
+          href="/votre-excursion"
+          class="inline-flex min-h-12 items-center justify-center rounded-full bg-teal-500 px-6 py-3 font-black text-white no-underline shadow-2xl shadow-teal-700/20 transition hover:-translate-y-0.5 hover:bg-teal-600"
+        >
+          Découvrir l’excursion
+        </a>
+
+        <a
+          href="/reserver#reservation"
+          class="inline-flex min-h-12 items-center justify-center rounded-full bg-yellow-300 px-6 py-3 font-black text-slate-950 no-underline transition hover:-translate-y-0.5 hover:bg-yellow-200"
+        >
+          Réserver en ligne
+        </a>
+      </div>
+    </section>
+
+    <!-- Carrousel -->
+    <ImageCarousel images={carouselImages} />
+
+    <!-- Promesses -->
+    <section class="py-16">
+      <div class="mb-9 max-w-3xl">
+        <p class="mb-3 text-xs font-black uppercase tracking-[0.14em] text-teal-600">
+          Pourquoi venir ?
+        </p>
+
+        <h2 class="font-['Baloo_2'] text-[clamp(2.2rem,4vw,4rem)] font-extrabold leading-none text-slate-950">
+          Une sortie nature, simple et mémorable
+        </h2>
+      </div>
+
+      <div class="grid grid-cols-3 gap-5 max-lg:grid-cols-1">
+        <article class="rounded-[28px] border border-slate-900/10 bg-white p-7 shadow-2xl shadow-slate-900/10">
+          <span class="mb-5 grid size-11 place-items-center rounded-full bg-slate-100 font-black text-teal-600">
+            01
+          </span>
+          <h3 class="font-['Baloo_2'] text-3xl font-extrabold leading-none text-slate-950">
+            Bateau sans permis
+          </h3>
+          <p class="mt-4 leading-relaxed text-slate-600">
+            Vous pilotez votre propre bateau, sans permis, après un briefing
+            clair. Le guide ouvre la voie, vous profitez du décor.
+          </p>
+        </article>
+
+        <article class="rounded-[28px] border border-slate-900/10 bg-white p-7 shadow-2xl shadow-slate-900/10">
+          <span class="mb-5 grid size-11 place-items-center rounded-full bg-slate-100 font-black text-teal-600">
+            02
+          </span>
+          <h3 class="font-['Baloo_2'] text-3xl font-extrabold leading-none text-slate-950">
+            Groupe privatisé
+          </h3>
+          <p class="mt-4 leading-relaxed text-slate-600">
+            Ici, on ne “charge” pas les bateaux. Vous restez entre vous, en
+            famille ou entre amis, pour une expérience plus confortable.
+          </p>
+        </article>
+
+        <article class="rounded-[28px] border border-slate-900/10 bg-white p-7 shadow-2xl shadow-slate-900/10">
+          <span class="mb-5 grid size-11 place-items-center rounded-full bg-slate-100 font-black text-teal-600">
+            03
+          </span>
+          <h3 class="font-['Baloo_2'] text-3xl font-extrabold leading-none text-slate-950">
+            Guide passionné
+          </h3>
+          <p class="mt-4 leading-relaxed text-slate-600">
+            Richard vous accompagne dans les recoins de la mangrove et partage
+            son expérience du milieu marin, de la faune et de la flore locale.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <!-- Parcours -->
+    <section class="py-20">
+      <div class="grid items-center gap-10 lg:grid-cols-[0.95fr_1.05fr]">
+        <div class="overflow-hidden rounded-[28px] shadow-2xl shadow-slate-900/15">
+          <img
+            src="/images/mangrove-guadeloupe.webp"
+            alt="Mangrove de Sainte-Rose en Guadeloupe"
+            class="h-full w-full object-cover"
+          />
+        </div>
+
+        <div>
+          <p class="mb-3 text-xs font-black uppercase tracking-[0.14em] text-teal-600">
+            Le parcours
+          </p>
+
+          <h2 class="font-['Baloo_2'] text-[clamp(2.2rem,4vw,4rem)] font-extrabold leading-none text-slate-950">
+            Mangrove, lagon, îlets et snorkeling
+          </h2>
+
+          <p class="mt-6 leading-relaxed text-slate-600">
+            L’excursion commence depuis le port de Sainte-Rose, direction la
+            mangrove et ses palétuviers. Vous découvrez un écosystème fragile,
+            vivant et essentiel à l’équilibre naturel de la Guadeloupe.
+          </p>
+
+          <p class="mt-4 leading-relaxed text-slate-600">
+            La sortie se poursuit vers les îlets du lagon : l’îlet La Biche,
+            les eaux turquoise, une pause snorkeling avec palmes, masque et
+            tuba, puis l’île aux Oiseaux. Selon la saison, la fin du parcours se
+            fait vers l’îlet Blanc ou vers la Piscine.
+          </p>
+
+          <div class="mt-7 grid gap-3">
+            <div class="rounded-2xl bg-slate-50 p-4">
+              <strong class="text-slate-950">Cœur de mangrove</strong>
+              <p class="mt-1 text-sm leading-relaxed text-slate-600">
+                Palétuviers, oiseaux, crabes, passages étroits et explications
+                sur le rôle de cet écosystème.
+              </p>
+            </div>
+
+            <div class="rounded-2xl bg-slate-50 p-4">
+              <strong class="text-slate-950">Lagon et îlets</strong>
+              <p class="mt-1 text-sm leading-relaxed text-slate-600">
+                Îlet La Biche, nuances de bleu, photos, baignade et ambiance
+                carte postale — sans avoir besoin de vendre un rein.
+              </p>
+            </div>
+
+            <div class="rounded-2xl bg-slate-50 p-4">
+              <strong class="text-slate-950">Randonnée palmée</strong>
+              <p class="mt-1 text-sm leading-relaxed text-slate-600">
+                Une pause snorkeling encadrée, avec prêt du matériel si besoin,
+                pour observer les fonds marins en sécurité.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Qualité / sécurité -->
+    <section class="rounded-4xl bg-slate-950 px-6 py-14 text-white md:px-10">
+      <div class="mx-auto max-w-3xl text-center">
+        <p class="mb-3 text-xs font-black uppercase tracking-[0.14em] text-teal-300">
+          Charte qualité
+        </p>
+
+        <h2 class="font-['Baloo_2'] text-[clamp(2.2rem,4vw,4rem)] font-extrabold leading-none text-white">
+          Une excursion encadrée, conviviale et respectueuse
+        </h2>
+
+        <p class="mt-6 leading-relaxed text-white/70">
+          Alizés Adventure privilégie les petits groupes, le confort, la
+          sécurité et la découverte responsable du Grand Cul-de-Sac Marin.
+        </p>
+      </div>
+
+      <div class="mt-10 grid grid-cols-3 gap-5 max-lg:grid-cols-1">
+        <article class="rounded-3xl bg-white/10 p-6 backdrop-blur">
+          <h3 class="font-['Baloo_2'] text-2xl font-extrabold leading-none text-white">
+            Sécurité à bord
+          </h3>
+          <p class="mt-4 leading-relaxed text-white/70">
+            Bateaux insubmersibles, moteurs adaptés, gilets de sauvetage,
+            ponchos et briefing avant le départ.
+          </p>
+        </article>
+
+        <article class="rounded-3xl bg-white/10 p-6 backdrop-blur">
+          <h3 class="font-['Baloo_2'] text-2xl font-extrabold leading-none text-white">
+            Matériel fourni
+          </h3>
+          <p class="mt-4 leading-relaxed text-white/70">
+            Palmes, masques, tubas, bidon étanche et aides à la flottabilité
+            pour profiter de la sortie sereinement.
+          </p>
+        </article>
+
+        <article class="rounded-3xl bg-white/10 p-6 backdrop-blur">
+          <h3 class="font-['Baloo_2'] text-2xl font-extrabold leading-none text-white">
+            Respect du milieu
+          </h3>
+          <p class="mt-4 leading-relaxed text-white/70">
+            Une découverte douce de la mangrove, des coraux, des herbiers et de
+            la faune locale, sans jouer les bulldozers aquatiques.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <!-- Infos pratiques -->
+    <section class="py-20">
+      <div class="grid gap-5 lg:grid-cols-3">
+        <article class="rounded-[28px] border border-slate-900/10 bg-white p-7 shadow-2xl shadow-slate-900/10">
+          <p class="mb-3 text-xs font-black uppercase tracking-[0.14em] text-teal-600">
+            Départ
+          </p>
+          <h3 class="font-['Baloo_2'] text-3xl font-extrabold leading-none text-slate-950">
+            Port de Sainte-Rose
+          </h3>
+          <p class="mt-4 leading-relaxed text-slate-600">
+            Retrouvez l’équipe sur le port de Sainte-Rose, à la cabane violette.
+          </p>
+        </article>
+
+        <article class="rounded-[28px] border border-slate-900/10 bg-white p-7 shadow-2xl shadow-slate-900/10">
+          <p class="mb-3 text-xs font-black uppercase tracking-[0.14em] text-teal-600">
+            Horaires
+          </p>
+          <h3 class="font-['Baloo_2'] text-3xl font-extrabold leading-none text-slate-950">
+            Matin ou après-midi
+          </h3>
+          <p class="mt-4 leading-relaxed text-slate-600">
+            Rendez-vous à 7h15 pour le départ du matin ou à 12h00 pour la sortie
+            de l’après-midi.
+          </p>
+        </article>
+
+        <article class="rounded-[28px] border border-slate-900/10 bg-white p-7 shadow-2xl shadow-slate-900/10">
+          <p class="mb-3 text-xs font-black uppercase tracking-[0.14em] text-teal-600">
+            À prévoir
+          </p>
+          <h3 class="font-['Baloo_2'] text-3xl font-extrabold leading-none text-slate-950">
+            Maillot, chapeau, crème solaire
+          </h3>
+          <p class="mt-4 leading-relaxed text-slate-600">
+            Pensez aussi à un vêtement de pluie. Oui, la Guadeloupe sait faire
+            soleil + douche surprise dans le même épisode.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <!-- Tarifs teaser -->
+    <section class="rounded-4xl bg-yellow-100 p-8 md:p-10">
+      <div class="flex items-center justify-between gap-8 max-lg:flex-col max-lg:items-start">
+        <div>
+          <p class="mb-3 text-xs font-black uppercase tracking-[0.14em] text-teal-700">
+            Tarifs et réservation
+          </p>
+
+          <h2 class="font-['Baloo_2'] text-[clamp(2rem,3vw,3.4rem)] font-extrabold leading-none text-slate-950">
+            Une sortie accessible, à réserver simplement
+          </h2>
+
+          <p class="mt-5 max-w-2xl leading-relaxed text-slate-700">
+            Tarif adulte : 49€ + 1€ de taxe Parc national. Tarif enfant de 2 à
+            9 ans : 29€ + 1€ de taxe Parc national.
+          </p>
+        </div>
+
+        <a
+          href="/reserver#reservation"
+          class="inline-flex min-h-12 shrink-0 items-center justify-center rounded-full bg-slate-950 px-6 py-3 font-black text-white no-underline transition hover:-translate-y-0.5 hover:bg-teal-700"
+        >
+          Voir les disponibilités
+        </a>
+      </div>
+    </section>
+
+    <!-- CTA final -->
+    <section class="my-20 flex items-center justify-between gap-6 rounded-[28px] bg-[radial-gradient(circle_at_top_right,rgba(250,204,21,.42),transparent_34%),linear-gradient(135deg,#0f766e,#14b8a6)] p-10 text-white max-md:flex-col max-md:items-start">
+      <div>
+        <p class="mb-3 text-xs font-black uppercase tracking-[0.14em] text-white">
+          Prêt à embarquer ?
+        </p>
+
+        <h2 class="font-['Baloo_2'] text-[clamp(2.2rem,4vw,4rem)] font-extrabold leading-none text-white">
+          Réservez votre sortie dans la mangrove
+        </h2>
+
+        <p class="mt-4 max-w-2xl leading-relaxed text-white/80">
+          Une excursion guidée, conviviale et dépaysante pour découvrir la
+          mangrove de Sainte-Rose, le lagon et les îlets de Guadeloupe autrement.
+        </p>
+      </div>
+
+      <a
+        href="/reserver#reservation"
+        class="inline-flex min-h-12 shrink-0 items-center justify-center rounded-full bg-white px-6 py-3 font-black text-slate-950 no-underline transition hover:-translate-y-0.5 hover:bg-yellow-100"
+      >
+        Réserver maintenant
+      </a>
+    </section>
+  </main>
+</BaseLayout>

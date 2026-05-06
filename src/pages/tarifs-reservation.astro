@@ -1,0 +1,173 @@
+---
+import PageLayout from "../layouts/PageLayout.astro";
+---
+
+<PageLayout
+  title="Tarif et réservation — Alizés Adventure"
+  description="Consultez les tarifs et horaires des excursions Alizés Adventure en Guadeloupe."
+  heroTitle="Tarif et réservation"
+  heroSubtitle="Deux départs possibles selon disponibilité : matin ou après-midi."
+  heroImage="/images/hero-mangrove.webp"
+>
+  <section class="grid grid-cols-[minmax(0,1fr)_310px] gap-10 py-20 max-lg:grid-cols-1">
+    <article class="rounded-[28px] border border-slate-900/10 bg-white p-10 shadow-2xl shadow-slate-900/10 max-md:p-6">
+      <p class="mb-3 text-xs font-black uppercase tracking-[0.14em] text-teal-600">
+        Tarifs
+      </p>
+
+      <h2 class="font-['Baloo_2'] text-[clamp(2.2rem,4vw,4rem)] font-extrabold leading-none text-slate-950">
+        Tarif adulte : 49€ + 1€ de taxe parc national
+      </h2>
+
+      <p class="mt-5 font-['Baloo_2'] text-3xl font-extrabold leading-none text-slate-950">
+        Tarif enfant de 2 à 9 ans : 29€ + 1€ de taxe parc national
+      </p>
+
+      <p class="mt-6 leading-relaxed text-slate-600">
+        Les excursions sont proposées selon les disponibilités, avec deux
+        créneaux possibles : le matin ou l’après-midi. La réservation permet de
+        garantir votre place et d’organiser les bateaux selon la taille de votre
+        groupe.
+      </p>
+
+      <div class="mt-8 grid grid-cols-3 gap-3 max-md:grid-cols-1">
+        <img
+          class="h-44 w-full rounded-3xl object-cover"
+          src="/images/mangrove.webp"
+          alt="Mangrove de Guadeloupe"
+        />
+        <img
+          class="h-44 w-full rounded-3xl object-cover"
+          src="/images/grand-cul-de-sac-marin.webp"
+          alt="Grand Cul-de-Sac Marin"
+        />
+        <img
+          class="h-44 w-full rounded-3xl object-cover"
+          src="/images/lagon.webp"
+          alt="Lagon de Guadeloupe"
+        />
+      </div>
+
+      <section class="mt-10">
+        <p class="mb-3 text-xs font-black uppercase tracking-[0.14em] text-teal-600">
+          Horaires
+        </p>
+
+        <h2 class="font-['Baloo_2'] text-[clamp(2.2rem,4vw,4rem)] font-extrabold leading-none text-slate-950">
+          Deux sorties selon disponibilité
+        </h2>
+
+        <div class="mt-6 grid gap-4">
+          <div class="rounded-3xl bg-slate-100 p-6">
+            <p class="m-0 text-lg leading-relaxed text-slate-700">
+              <strong class="text-slate-950">Départ matin :</strong>
+              rendez-vous à 7h15
+            </p>
+          </div>
+
+          <div class="rounded-3xl bg-slate-100 p-6">
+            <p class="m-0 text-lg leading-relaxed text-slate-700">
+              <strong class="text-slate-950">Départ après-midi :</strong>
+              rendez-vous à 12h00
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="mt-10">
+        <p class="mb-3 text-xs font-black uppercase tracking-[0.14em] text-teal-600">
+          Réservation
+        </p>
+
+        <h2 class="font-['Baloo_2'] text-[clamp(2.2rem,4vw,4rem)] font-extrabold leading-none text-slate-950">
+          Réserver votre excursion
+        </h2>
+
+        <p class="mt-6 leading-relaxed text-slate-600">
+          Pour réserver, vous pouvez utiliser la nouvelle page de réservation en
+          ligne ou contacter directement Alizés Adventure par téléphone ou par
+          e-mail.
+        </p>
+
+        <div class="mt-8 rounded-3xl bg-teal-600 p-8 text-white">
+          <h3 class="font-['Baloo_2'] text-3xl font-extrabold leading-none text-white">
+            Nouvelle réservation en ligne
+          </h3>
+
+          <p class="mt-4 leading-relaxed text-white/85">
+            Sélectionnez une date, un créneau et le nombre de personnes. Le
+            système calcule les bateaux nécessaires automatiquement.
+          </p>
+
+          <a
+            href="/reserver#reservation"
+            class="mt-5 inline-flex min-h-12 items-center justify-center rounded-full bg-white px-6 py-3 font-black text-slate-950 no-underline transition hover:-translate-y-0.5 hover:bg-yellow-100"
+          >
+            Réserver maintenant
+          </a>
+        </div>
+      </section>
+    </article>
+
+    <aside class="grid content-start gap-5">
+      <div class="rounded-[28px] border border-slate-900/10 bg-white p-6 shadow-2xl shadow-slate-900/10">
+        <p class="mb-2 text-xs font-black uppercase tracking-[0.14em] text-teal-600">
+          Contact
+        </p>
+
+        <h3 class="font-['Baloo_2'] text-3xl font-extrabold leading-none text-slate-950">
+          Réserver par téléphone
+        </h3>
+
+        <p class="mt-4 leading-relaxed text-slate-600">
+          Tél. :
+          <a class="font-bold text-teal-700 underline decoration-teal-500/30 underline-offset-4" href="tel:+590690262051">
+            +590 690 26 20 51
+          </a>
+          <br />
+          Email :
+          <a class="font-bold text-teal-700 underline decoration-teal-500/30 underline-offset-4" href="mailto:alizesadventure@gmail.com">
+            alizesadventure@gmail.com
+          </a>
+        </p>
+      </div>
+
+      <div class="rounded-[28px] border border-slate-900/10 bg-white p-6 shadow-2xl shadow-slate-900/10">
+        <p class="mb-2 text-xs font-black uppercase tracking-[0.14em] text-teal-600">
+          Départ
+        </p>
+
+        <h3 class="font-['Baloo_2'] text-3xl font-extrabold leading-none text-slate-950">
+          Cabane violette
+        </h3>
+
+        <p class="mt-4 leading-relaxed text-slate-600">
+          Le départ se fait au port de Sainte-Rose, à la cabane violette.
+        </p>
+      </div>
+
+      <div class="rounded-[28px] bg-yellow-300 p-6 text-slate-950 shadow-2xl shadow-yellow-900/10">
+        <p class="mb-2 text-xs font-black uppercase tracking-[0.14em] text-slate-900/70">
+          Capacité
+        </p>
+
+        <h3 class="font-['Baloo_2'] text-3xl font-extrabold leading-none text-slate-950">
+          4 bateaux
+        </h3>
+
+        <p class="mt-4 leading-relaxed text-slate-800">
+          Chaque bateau peut accueillir jusqu’à 4 personnes. Un groupe de 3
+          bloque donc un bateau complet.
+        </p>
+      </div>
+
+      <div class="overflow-hidden rounded-[28px] border border-slate-900/10 bg-white shadow-2xl shadow-slate-900/10">
+        <img
+          class="h-full w-full object-cover"
+          src="/images/accueil-depart.webp"
+          alt="Cabane de départ Alizés Adventure"
+        />
+      </div>
+    </aside>
+  </section>
+</PageLayout>

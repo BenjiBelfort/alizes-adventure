@@ -1,0 +1,202 @@
+---
+import PageLayout from "../layouts/PageLayout.astro";
+
+const inputClass =
+  "w-full rounded-xl border border-slate-900/10 bg-white px-4 py-3 font-normal text-slate-950 outline-none transition focus:border-teal-500 focus:ring-4 focus:ring-teal-500/10";
+
+const labelClass = "grid gap-2 font-black text-slate-950";
+
+const requiredStar =
+  '<span class="text-red-600" aria-hidden="true">*</span><span class="sr-only"> obligatoire</span>';
+---
+
+<PageLayout
+  title="Contact — Alizés Adventure"
+  description="Contactez Alizés Adventure pour une excursion dans la mangrove en Guadeloupe."
+  heroTitle="Contact"
+  heroSubtitle="Une question, une réservation, une précision ? On vous répond rapidement."
+  heroImage="/images/hero-mangrove.webp"
+>
+  <section class="grid grid-cols-2 gap-8 py-20 max-lg:grid-cols-1">
+    <article class="rounded-[28px] border border-slate-900/10 bg-white p-10 shadow-2xl shadow-slate-900/10 max-md:p-6">
+      <p class="mb-3 text-xs font-black uppercase tracking-[0.14em] text-teal-600">
+        Nous contacter
+      </p>
+
+      <h2 class="font-['Baloo_2'] text-[clamp(2.2rem,4vw,4rem)] font-extrabold leading-none text-slate-950">
+        Alizés Adventure
+      </h2>
+
+      <p class="mt-6 leading-relaxed text-slate-600">
+        Une question avant votre sortie ? Besoin d’une précision sur le départ,
+        les horaires ou la réservation ? Contactez Alizés Adventure directement.
+      </p>
+
+      <div class="mt-8 grid gap-4">
+        <div class="rounded-3xl bg-slate-100 p-6">
+          <p class="mb-1 text-xs font-black uppercase tracking-[0.14em] text-teal-600">
+            Téléphone
+          </p>
+
+          <a
+            class="text-lg font-black text-slate-950 underline decoration-teal-500/30 underline-offset-4"
+            href="tel:+590690262051"
+          >
+            +590 690 26 20 51
+          </a>
+        </div>
+
+        <div class="rounded-3xl bg-slate-100 p-6">
+          <p class="mb-1 text-xs font-black uppercase tracking-[0.14em] text-teal-600">
+            Email
+          </p>
+
+          <a
+            class="wrap-break-word text-lg font-black text-slate-950 underline decoration-teal-500/30 underline-offset-4"
+            href="mailto:alizesadventure@gmail.com"
+          >
+            alizesadventure@gmail.com
+          </a>
+        </div>
+
+        <div class="rounded-3xl bg-slate-100 p-6">
+          <p class="mb-1 text-xs font-black uppercase tracking-[0.14em] text-teal-600">
+            Adresse de départ
+          </p>
+
+          <p class="m-0 text-lg font-black text-slate-950">
+            Port de Sainte-Rose, Guadeloupe
+          </p>
+        </div>
+      </div>
+
+      <div class="mt-8 rounded-3xl bg-teal-600 p-8 text-white">
+        <h3 class="font-['Baloo_2'] text-3xl font-extrabold leading-none text-white">
+          Pour réserver plus vite
+        </h3>
+
+        <p class="mt-4 leading-relaxed text-white/85">
+          Utilisez la page de réservation en ligne pour voir les créneaux
+          disponibles.
+        </p>
+
+        <a
+          href="/reserver#reservation"
+          class="mt-5 inline-flex min-h-12 items-center justify-center rounded-full bg-white px-6 py-3 font-black text-slate-950 no-underline transition hover:-translate-y-0.5 hover:bg-yellow-100"
+        >
+          Voir les disponibilités
+        </a>
+      </div>
+    </article>
+
+    <form
+      class="grid content-start gap-5 rounded-[28px] border border-slate-900/10 bg-white p-8 shadow-2xl shadow-slate-900/10 max-md:p-6"
+    >
+      <p class="mb-0 text-xs font-black uppercase tracking-[0.14em] text-teal-600">
+        Message
+      </p>
+
+      <h2 class="font-['Baloo_2'] text-[clamp(2.2rem,4vw,4rem)] font-extrabold leading-none text-slate-950">
+        Envoyer un message
+      </h2>
+
+      <p class="-mt-2 text-sm leading-relaxed text-slate-500">
+        Une demande, une question, une précision ? Écrivez votre message ici.
+        Promis, le formulaire ne mord pas.
+      </p>
+
+      <div class="grid grid-cols-2 gap-4 max-md:grid-cols-1">
+        <label class={labelClass}>
+          <span set:html={`Prénom ${requiredStar}`} />
+          <input
+            class={inputClass}
+            name="firstname"
+            type="text"
+            autocomplete="given-name"
+            required
+          />
+        </label>
+
+        <label class={labelClass}>
+          <span set:html={`Nom ${requiredStar}`} />
+          <input
+            class={inputClass}
+            name="lastname"
+            type="text"
+            autocomplete="family-name"
+            required
+          />
+        </label>
+
+        <label class={labelClass}>
+          <span set:html={`E-mail ${requiredStar}`} />
+          <input
+            class={inputClass}
+            name="email"
+            type="email"
+            autocomplete="email"
+            required
+          />
+        </label>
+
+        <label class={labelClass}>
+          <span>Téléphone</span>
+          <input
+            class={inputClass}
+            name="phone"
+            type="tel"
+            autocomplete="tel"
+          />
+        </label>
+      </div>
+
+      <label class={labelClass}>
+        <span set:html={`Message ${requiredStar}`} />
+        <textarea
+          class={`${inputClass} min-h-40 resize-y`}
+          name="message"
+          rows="6"
+          placeholder="Votre question, votre demande ou une précision utile..."
+          required
+        ></textarea>
+      </label>
+
+      <label class="flex items-start gap-3 rounded-2xl bg-slate-100 p-4 font-semibold leading-relaxed text-slate-700">
+        <input
+          class="mt-1 size-4 shrink-0 accent-teal-600"
+          name="consent"
+          type="checkbox"
+          required
+        />
+
+        <span>
+          J’accepte que les informations saisies dans ce formulaire soient
+          utilisées par Alizés Adventure pour répondre à ma demande de contact.
+          <span class="text-red-600" aria-hidden="true">*</span>
+          <span class="sr-only"> obligatoire</span>
+        </span>
+      </label>
+
+      <p class="-mt-2 text-sm text-slate-500">
+        <span class="text-red-600">*</span> Champs obligatoires
+      </p>
+
+      <button
+        class="inline-flex min-h-12 w-full items-center justify-center rounded-full bg-teal-500 px-6 py-3 font-black text-white shadow-2xl shadow-teal-700/20 transition hover:-translate-y-0.5 hover:bg-teal-600"
+        type="submit"
+      >
+        Envoyer mon message
+      </button>
+
+      <p class="m-0 text-sm leading-relaxed text-slate-500">
+        Vos données sont uniquement utilisées pour traiter votre demande. Elles
+        ne sont ni revendues, ni transmises à des tiers.
+      </p>
+
+      <p class="m-0 text-sm leading-relaxed text-slate-500">
+        Formulaire statique pour le moment. On branchera l’envoi ensuite. Là,
+        il est bien habillé, mais il n’a pas encore son permis de poster.
+      </p>
+    </form>
+  </section>
+</PageLayout>

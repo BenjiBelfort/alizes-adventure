@@ -1,0 +1,41 @@
+---
+import BaseLayout from "./BaseLayout.astro";
+import Hero from "../components/Hero.astro";
+
+interface Props {
+  title: string;
+  description?: string;
+  heroTitle?: string;
+  heroSubtitle?: string;
+  heroImage?: string;
+  showHero?: boolean;
+  wide?: boolean;
+}
+
+const {
+  title,
+  description,
+  heroTitle = "",
+  heroSubtitle,
+  heroImage = "/images/hero-mangrove.webp",
+  showHero = true,
+  wide = false,
+} = Astro.props;
+---
+
+<BaseLayout title={title} description={description}>
+  {showHero && (
+    <Hero title={heroTitle} subtitle={heroSubtitle} image={heroImage} />
+  )}
+
+  <main
+    class:list={[
+      "relative z-10 mx-auto overflow-visible",
+      wide
+        ? "w-[min(calc(100%-1rem),1400px)]"
+        : "w-[min(calc(100%-1rem),1120px)]",
+    ]}
+  >
+    <slot />
+  </main>
+</BaseLayout>

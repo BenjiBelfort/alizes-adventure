@@ -1,0 +1,65 @@
+---
+interface Props {
+  name?: string;
+  date?: string;
+  period?: string;
+  passengers?: number;
+  boats?: number;
+  phone?: string;
+  email?: string;
+  status?: "confirmed" | "pending" | "cancelled";
+}
+
+const {
+  name = "Client démo",
+  date = "12 mai 2026",
+  period = "Matin",
+  passengers = 3,
+  boats = 1,
+  phone = "06 90 26 20 51",
+  email = "client@example.com",
+  status = "confirmed",
+} = Astro.props;
+
+const statusLabel = {
+  confirmed: "Confirmée",
+  pending: "En attente",
+  cancelled: "Annulée",
+}[status];
+---
+
+<article class="rounded-[28px] border border-slate-900/10 bg-white p-6 shadow-2xl shadow-slate-900/10">
+  <div>
+    <p class="mb-3 inline-flex rounded-full bg-teal-500/10 px-3 py-1.5 text-sm font-black text-teal-700">
+      {statusLabel}
+    </p>
+
+    <h3 class="font-['Baloo_2'] text-3xl font-extrabold leading-none text-slate-950">
+      {name}
+    </h3>
+
+    <p class="mt-2 text-slate-600">{date} • {period}</p>
+  </div>
+
+  <dl class="mt-5 grid grid-cols-2 gap-4">
+    <div>
+      <dt class="text-sm text-slate-500">Personnes</dt>
+      <dd class="mt-1 font-black text-slate-950">{passengers}</dd>
+    </div>
+
+    <div>
+      <dt class="text-sm text-slate-500">Bateaux</dt>
+      <dd class="mt-1 font-black text-slate-950">{boats}</dd>
+    </div>
+
+    <div>
+      <dt class="text-sm text-slate-500">Téléphone</dt>
+      <dd class="mt-1 font-black text-slate-950">{phone}</dd>
+    </div>
+
+    <div>
+      <dt class="text-sm text-slate-500">E-mail</dt>
+      <dd class="mt-1 font-black text-slate-950">{email}</dd>
+    </div>
+  </dl>
+</article>

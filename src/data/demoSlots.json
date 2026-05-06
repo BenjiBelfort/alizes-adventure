@@ -1,0 +1,156 @@
+[
+  {
+    "id": "slot-2026-05-11-morning",
+    "date": "2026-05-11",
+    "period": "morning",
+    "time": "9h00",
+    "boatsRemaining": 4
+  },
+  {
+    "id": "slot-2026-05-12-morning",
+    "date": "2026-05-12",
+    "period": "morning",
+    "time": "9h00",
+    "boatsRemaining": 2
+  },
+  {
+    "id": "slot-2026-05-13-morning",
+    "date": "2026-05-13",
+    "period": "morning",
+    "time": "9h00",
+    "boatsRemaining": 0
+  },
+  {
+    "id": "slot-2026-05-14-morning",
+    "date": "2026-05-14",
+    "period": "morning",
+    "time": "9h00",
+    "boatsRemaining": 1
+  },
+  {
+    "id": "slot-2026-05-15-morning",
+    "date": "2026-05-15",
+    "period": "morning",
+    "time": "9h00",
+    "boatsRemaining": 4
+  },
+  {
+    "id": "slot-2026-05-16-morning",
+    "date": "2026-05-16",
+    "period": "morning",
+    "time": "9h00",
+    "boatsRemaining": 0
+  },
+  {
+    "id": "slot-2026-05-17-morning",
+    "date": "2026-05-17",
+    "period": "morning",
+    "time": "9h00",
+    "boatsRemaining": 3
+  },
+
+  {
+    "id": "slot-2026-05-18-morning",
+    "date": "2026-05-18",
+    "period": "morning",
+    "time": "7h15",
+    "boatsRemaining": 4
+  },
+  {
+    "id": "slot-2026-05-18-afternoon",
+    "date": "2026-05-18",
+    "period": "afternoon",
+    "time": "12h00",
+    "boatsRemaining": 4
+  },
+
+  {
+    "id": "slot-2026-05-19-morning",
+    "date": "2026-05-19",
+    "period": "morning",
+    "time": "7h15",
+    "boatsRemaining": 2
+  },
+  {
+    "id": "slot-2026-05-19-afternoon",
+    "date": "2026-05-19",
+    "period": "afternoon",
+    "time": "12h00",
+    "boatsRemaining": 0
+  },
+
+  {
+    "id": "slot-2026-05-20-morning",
+    "date": "2026-05-20",
+    "period": "morning",
+    "time": "7h15",
+    "boatsRemaining": 0
+  },
+  {
+    "id": "slot-2026-05-20-afternoon",
+    "date": "2026-05-20",
+    "period": "afternoon",
+    "time": "12h00",
+    "boatsRemaining": 0
+  },
+
+  {
+    "id": "slot-2026-05-21-morning",
+    "date": "2026-05-21",
+    "period": "morning",
+    "time": "7h15",
+    "boatsRemaining": 1
+  },
+  {
+    "id": "slot-2026-05-21-afternoon",
+    "date": "2026-05-21",
+    "period": "afternoon",
+    "time": "12h00",
+    "boatsRemaining": 3
+  },
+
+  {
+    "id": "slot-2026-05-22-morning",
+    "date": "2026-05-22",
+    "period": "morning",
+    "time": "7h15",
+    "boatsRemaining": 4
+  },
+  {
+    "id": "slot-2026-05-22-afternoon",
+    "date": "2026-05-22",
+    "period": "afternoon",
+    "time": "12h00",
+    "boatsRemaining": 2
+  },
+
+  {
+    "id": "slot-2026-05-23-morning",
+    "date": "2026-05-23",
+    "period": "morning",
+    "time": "7h15",
+    "boatsRemaining": 0
+  },
+  {
+    "id": "slot-2026-05-23-afternoon",
+    "date": "2026-05-23",
+    "period": "afternoon",
+    "time": "12h00",
+    "boatsRemaining": 1
+  },
+
+  {
+    "id": "slot-2026-05-24-morning",
+    "date": "2026-05-24",
+    "period": "morning",
+    "time": "7h15",
+    "boatsRemaining": 3
+  },
+  {
+    "id": "slot-2026-05-24-afternoon",
+    "date": "2026-05-24",
+    "period": "afternoon",
+    "time": "12h00",
+    "boatsRemaining": 4
+  }
+]

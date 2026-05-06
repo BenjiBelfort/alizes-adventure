@@ -1,0 +1,225 @@
+---
+interface CarouselImage {
+  src: string;
+  alt: string;
+}
+
+interface Props {
+  images: CarouselImage[];
+  class?: string;
+  interval?: number;
+}
+
+type CarouselSlide = CarouselImage & {
+  clone: boolean;
+};
+
+const {
+  images = [],
+  class: className = "",
+  interval = 4500,
+} = Astro.props;
+
+const carouselId = `carousel-${Math.random().toString(36).slice(2)}`;
+
+const slides: CarouselSlide[] =
+  images.length > 1
+    ? [
+        { ...images[images.length - 1], clone: true },
+        ...images.map((image: CarouselImage) => ({ ...image, clone: false })),
+        { ...images[0], clone: true },
+      ]
+    : images.map((image: CarouselImage) => ({ ...image, clone: false }));
+---
+
+{
+  images.length > 0 && (
+    <section
+      id={carouselId}
+      class:list={[
+        "group relative mx-auto mb-20 max-w-4xl overflow-hidden rounded-[28px] bg-slate-100 shadow-2xl shadow-slate-900/15",
+        className,
+      ]}
+      aria-roledescription="carousel"
+      aria-label="Photos de l’excursion Alizés Adventure"
+      data-carousel
+      data-carousel-interval={interval}
+    >
+      <div class="relative aspect-16/10 overflow-hidden max-md:aspect-4/3">
+        <div
+          class="flex h-full transition-transform duration-700 ease-[cubic-bezier(.22,1,.36,1)]"
+          data-carousel-track
+        >
+          {
+            slides.map((image: CarouselSlide, index: number) => (
+              <div
+                class="relative h-full min-w-full"
+                aria-hidden={image.clone ? "true" : "false"}
+                data-carousel-slide
+              >
+                <img
+                  class="h-full w-full object-cover"
+                  src={image.src}
+                  alt={image.clone ? "" : image.alt}
+                  loading={index <= 2 ? "eager" : "lazy"}
+                  decoding="async"
+                />
+
+                <div class="pointer-events-none absolute inset-0 bg-linear-to-t from-slate-950/35 via-transparent to-transparent"></div>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+
+      {
+        images.length > 1 && (
+          <>
+            <button
+              type="button"
+              class="absolute left-4 top-1/2 grid size-11 -translate-y-1/2 place-items-center rounded-full bg-white/90 text-2xl font-black text-slate-950 shadow-xl backdrop-blur transition hover:-translate-x-0.5 hover:bg-yellow-300 focus:outline-none focus:ring-4 focus:ring-white/40"
+              aria-label="Image précédente"
+              data-carousel-prev
+            >
+              ‹
+            </button>
+
+            <button
+              type="button"
+              class="absolute right-4 top-1/2 grid size-11 -translate-y-1/2 place-items-center rounded-full bg-white/90 text-2xl font-black text-slate-950 shadow-xl backdrop-blur transition hover:translate-x-0.5 hover:bg-yellow-300 focus:outline-none focus:ring-4 focus:ring-white/40"
+              aria-label="Image suivante"
+              data-carousel-next
+            >
+              ›
+            </button>
+
+            <div class="absolute bottom-4 left-1/2 flex -translate-x-1/2 gap-2 rounded-full bg-slate-950/35 px-3 py-2 backdrop-blur">
+              {images.map((_: CarouselImage, index: number) => (
+                <button
+                  type="button"
+                  class:list={[
+                    "size-2.5 rounded-full bg-white/50 transition hover:bg-white",
+                    { "bg-yellow-300": index === 0 },
+                  ]}
+                  aria-label={`Aller à l’image ${index + 1}`}
+                  data-carousel-dot
+                  data-carousel-dot-index={index}
+                />
+              ))}
+            </div>
+          </>
+        )
+      }
+    </section>
+  )
+}
+
+<script>
+  const carousels = document.querySelectorAll<HTMLElement>("[data-carousel]");
+
+  carousels.forEach((carousel) => {
+    const track = carousel.querySelector<HTMLElement>("[data-carousel-track]");
+    const slides = carousel.querySelectorAll<HTMLElement>("[data-carousel-slide]");
+    const prevButton = carousel.querySelector<HTMLButtonElement>("[data-carousel-prev]");
+    const nextButton = carousel.querySelector<HTMLButtonElement>("[data-carousel-next]");
+    const dots = carousel.querySelectorAll<HTMLButtonElement>("[data-carousel-dot]");
+
+    if (!track || slides.length <= 1) return;
+
+    const interval =
+      Number(carousel.getAttribute("data-carousel-interval")) || 4500;
+
+    const prefersReducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+
+    let index = 1;
+    let timer: number | undefined;
+    let isAnimating = false;
+
+    const realSlidesCount = slides.length - 2;
+
+    const updateDots = () => {
+      const activeIndex =
+        index === 0
+          ? realSlidesCount - 1
+          : index === slides.length - 1
+            ? 0
+            : index - 1;
+
+      dots.forEach((dot, dotIndex) => {
+        dot.classList.toggle("bg-yellow-300", dotIndex === activeIndex);
+        dot.classList.toggle("bg-white/50", dotIndex !== activeIndex);
+      });
+    };
+
+    const moveTo = (nextIndex: number, withTransition = true) => {
+      track.classList.toggle("transition-transform", withTransition);
+      track.style.transform = `translateX(-${nextIndex * 100}%)`;
+      index = nextIndex;
+      updateDots();
+    };
+
+    const next = () => {
+      if (isAnimating) return;
+      isAnimating = true;
+      moveTo(index + 1);
+    };
+
+    const prev = () => {
+      if (isAnimating) return;
+      isAnimating = true;
+      moveTo(index - 1);
+    };
+
+    const stop = () => {
+      if (timer) window.clearInterval(timer);
+      timer = undefined;
+    };
+
+    const start = () => {
+      if (prefersReducedMotion) return;
+      stop();
+      timer = window.setInterval(next, interval);
+    };
+
+    track.addEventListener("transitionend", () => {
+      isAnimating = false;
+
+      if (index === slides.length - 1) {
+        moveTo(1, false);
+      }
+
+      if (index === 0) {
+        moveTo(slides.length - 2, false);
+      }
+    });
+
+    nextButton?.addEventListener("click", () => {
+      next();
+      start();
+    });
+
+    prevButton?.addEventListener("click", () => {
+      prev();
+      start();
+    });
+
+    dots.forEach((dot) => {
+      dot.addEventListener("click", () => {
+        const dotIndex = Number(dot.getAttribute("data-carousel-dot-index"));
+        moveTo(dotIndex + 1);
+        start();
+      });
+    });
+
+    carousel.addEventListener("mouseenter", stop);
+    carousel.addEventListener("mouseleave", start);
+
+    carousel.addEventListener("focusin", stop);
+    carousel.addEventListener("focusout", start);
+
+    moveTo(1, false);
+    start();
+  });
+</script>

@@ -1,0 +1,35 @@
+---
+const year = new Date().getFullYear();
+---
+
+<footer class="mt-10 bg-slate-950 text-white/75">
+  <div class="mx-auto flex w-[min(calc(100%-2rem),1120px)] justify-between gap-8 py-12 max-md:flex-col">
+    <div>
+      <strong class="font-['Baloo_2'] text-2xl text-white">
+        Alizés Adventure
+      </strong>
+      <p class="mt-2 max-w-md leading-relaxed">
+        Excursion dans la mangrove au départ de Sainte-Rose, Guadeloupe.
+      </p>
+    </div>
+
+    <nav class="grid gap-2">
+      <a class="font-extrabold text-white no-underline hover:text-yellow-300" href="/votre-excursion">
+        Votre excursion
+      </a>
+      <a class="font-extrabold text-white no-underline hover:text-yellow-300" href="/charte-qualite">
+        Charte qualité
+      </a>
+      <a class="font-extrabold text-white no-underline hover:text-yellow-300" href="/tarifs-reservation">
+        Tarifs
+      </a>
+      <a class="font-extrabold text-white no-underline hover:text-yellow-300" href="/contact">
+        Contact
+      </a>
+    </nav>
+  </div>
+
+  <div class="border-t border-white/10 px-4 py-5 text-center text-sm">
+    © {year} Alizés Adventure. Tous droits réservés.
+  </div>
+</footer>

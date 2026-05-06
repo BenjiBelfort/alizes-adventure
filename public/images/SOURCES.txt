@@ -1,0 +1,20 @@
+Médias extraits depuis le site public alizes-adventure.com
+
+Pages consultées :
+- https://www.alizes-adventure.com/
+- https://www.alizes-adventure.com/votre-excursion/
+- https://www.alizes-adventure.com/contact-2/
+- https://www.alizes-adventure.com/charte-qualite/
+
+Correspondances :
+- logo-alizes-adventure.webp : crop temporaire du visuel parcours.jpg
+- hero-home.webp : IMG_20170124_055316-1024x768.jpg
+- hero-mangrove.webp : la-riviere-moustique-1024x768.jpg
+- excursion-bateaux.webp : IMG_20170124_055316-1024x768.jpg
+- carte-parcours.webp : parcours.jpg
+- accueil-depart.webp : cabane_web.jpg
+- mangrove.webp : mangrove-petite-baie2-1024x768.jpg
+- grand-cul-de-sac-marin.webp : mangrove-la-petite-biche-1024x768.jpg
+- lagon.webp : excursion-mangrove_06.jpg
+
+Note : le logo propre n'a pas été trouvé comme fichier isolé dans les pages publiques consultées. Le fichier fourni est donc un crop temporaire.

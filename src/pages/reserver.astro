@@ -1,0 +1,32 @@
+---
+import PageLayout from "../layouts/PageLayout.astro";
+import BookingCalendar from "../components/BookingCalendar";
+---
+
+<PageLayout
+  title="Réserver une excursion — Alizés Adventure"
+  description="Réservez votre excursion dans la mangrove avec Alizés Adventure."
+  heroTitle="Réserver une excursion"
+  heroSubtitle="Choisissez votre date, votre créneau et le nombre de personnes."
+  heroImage="/images/hero-mangrove.webp"
+>
+  <section id="reservation" class="relative z-20">
+    <BookingCalendar client:load />
+  </section>
+
+  <section class="mx-auto max-w-3xl py-20 text-center">
+    <p class="mb-3 text-xs font-black uppercase tracking-[0.14em] text-teal-600">
+      Comment ça marche ?
+    </p>
+
+    <h2 class="font-['Baloo_2'] text-[clamp(2.2rem,4vw,4rem)] font-extrabold leading-none text-slate-950">
+      Le système calcule les bateaux nécessaires
+    </h2>
+
+    <p class="mt-6 leading-relaxed text-slate-600">
+      Chaque bateau peut accueillir jusqu’à 4 personnes. Un groupe de 3 bloque
+      donc un bateau complet. Un groupe de 5 bloque deux bateaux. Simple,
+      logique, et moins casse-tête qu’un tableau Excel écrit sous la pluie.
+    </p>
+  </section>
+</PageLayout>

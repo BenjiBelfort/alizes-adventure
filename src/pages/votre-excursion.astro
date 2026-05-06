@@ -1,0 +1,219 @@
+---
+import PageLayout from "../layouts/PageLayout.astro";
+---
+
+<PageLayout
+  title="Votre excursion — Alizés Adventure"
+  description="Découvrez le parcours de l’excursion Alizés Adventure dans la mangrove de Guadeloupe."
+  heroTitle="Votre excursion"
+  heroSubtitle="Un parcours guidé entre rivière, lagon, îlets et cœur de mangrove."
+  heroImage="/images/hero-mangrove.webp"
+>
+  <section class="grid grid-cols-[minmax(0,1fr)_310px] gap-10 py-20 max-lg:grid-cols-1">
+    <article class="rounded-[28px] border border-slate-900/10 bg-white p-10 shadow-2xl shadow-slate-900/10 max-md:p-6">
+      <img
+        class="mb-8 w-full rounded-3xl object-cover"
+        src="/images/carte-parcours.webp"
+        alt="Carte du parcours Alizés Adventure"
+      />
+
+      <p class="mb-3 text-xs font-black uppercase tracking-[0.14em] text-teal-600">
+        Le parcours
+      </p>
+
+      <h2 class="font-['Baloo_2'] text-[clamp(2.2rem,4vw,4rem)] font-extrabold leading-none text-slate-950">
+        Une excursion dans les différents univers de la mangrove
+      </h2>
+
+      <p class="mt-6 leading-relaxed text-slate-600">
+        Pour votre excursion, Alizés Adventure met un bateau sans permis à votre
+        disposition. Vous êtes accompagné par un guide professionnel qui vous
+        fait découvrir la mangrove, le Grand Cul-de-Sac Marin et les paysages
+        emblématiques de Sainte-Rose.
+      </p>
+
+      <p class="mt-4 leading-relaxed text-slate-600">
+        L’idée est simple : vous naviguez dans votre propre embarcation, en
+        suivant le guide. Une sortie accessible, conviviale, et parfaite pour
+        découvrir la Guadeloupe autrement, loin des circuits trop classiques.
+      </p>
+
+      <div class="mt-10 grid gap-8">
+        <section>
+          <h3 class="font-['Baloo_2'] text-3xl font-extrabold leading-none text-slate-950">
+            Cœur de mangrove
+          </h3>
+
+          <p class="mt-4 leading-relaxed text-slate-600">
+            Au départ du port de Sainte-Rose, l’excursion vous emmène vers la
+            rivière Moustique pour une immersion au cœur de la mangrove. Vous
+            découvrez les palétuviers, l’écosystème marin et les eaux calmes
+            typiques du lagon.
+          </p>
+        </section>
+
+        <section>
+          <h3 class="font-['Baloo_2'] text-3xl font-extrabold leading-none text-slate-950">
+            Îlets et lagon
+          </h3>
+
+          <p class="mt-4 leading-relaxed text-slate-600">
+            Le parcours se poursuit vers les îlets du lagon, avec des nuances de
+            bleu turquoise, des bancs de sable et des paysages parfaits pour
+            profiter du Grand Cul-de-Sac Marin.
+          </p>
+        </section>
+
+        <section>
+          <h3 class="font-['Baloo_2'] text-3xl font-extrabold leading-none text-slate-950">
+            Une sortie accessible
+          </h3>
+
+          <p class="mt-4 leading-relaxed text-slate-600">
+            Les bateaux sont sans permis et simples à prendre en main. Avant le
+            départ, les consignes sont expliquées clairement pour profiter de
+            l’excursion tranquillement. Pas besoin d’avoir un CV de capitaine,
+            promis.
+          </p>
+        </section>
+      </div>
+
+      <div class="mt-10 rounded-3xl bg-slate-100 p-6">
+        <h3 class="font-['Baloo_2'] text-3xl font-extrabold leading-none text-slate-950">
+          À prévoir
+        </h3>
+
+        <ul class="mt-5 grid gap-3 leading-relaxed text-slate-600">
+          <li class="flex gap-3">
+            <span class="mt-1 size-2.5 shrink-0 rounded-full bg-teal-500"></span>
+            Crème solaire
+          </li>
+          <li class="flex gap-3">
+            <span class="mt-1 size-2.5 shrink-0 rounded-full bg-teal-500"></span>
+            Chapeau ou casquette
+          </li>
+          <li class="flex gap-3">
+            <span class="mt-1 size-2.5 shrink-0 rounded-full bg-teal-500"></span>
+            Vêtement de pluie léger
+          </li>
+          <li class="flex gap-3">
+            <span class="mt-1 size-2.5 shrink-0 rounded-full bg-teal-500"></span>
+            Maillot de bain
+          </li>
+          <li class="flex gap-3">
+            <span class="mt-1 size-2.5 shrink-0 rounded-full bg-teal-500"></span>
+            Bonne humeur obligatoire, râlerie optionnelle mais déconseillée
+          </li>
+        </ul>
+      </div>
+
+      <div class="mt-8 flex flex-wrap gap-3">
+        <a
+          href="/tarifs-reservation"
+          class="inline-flex min-h-12 items-center justify-center rounded-full bg-teal-500 px-6 py-3 font-black text-white no-underline shadow-2xl shadow-teal-700/20 transition hover:-translate-y-0.5 hover:bg-teal-600"
+        >
+          Voir les tarifs
+        </a>
+
+        <a
+          href="/reserver#reservation"
+          class="inline-flex min-h-12 items-center justify-center rounded-full bg-yellow-300 px-6 py-3 font-black text-slate-950 no-underline transition hover:-translate-y-0.5 hover:bg-yellow-200"
+        >
+          Réserver
+        </a>
+      </div>
+    </article>
+
+    <aside class="grid content-start gap-5">
+      <div class="rounded-[28px] border border-slate-900/10 bg-white p-6 shadow-2xl shadow-slate-900/10">
+        <p class="mb-2 text-xs font-black uppercase tracking-[0.14em] text-teal-600">
+          Départ
+        </p>
+
+        <h3 class="font-['Baloo_2'] text-3xl font-extrabold leading-none text-slate-950">
+          Sainte-Rose
+        </h3>
+
+        <p class="my-4 leading-relaxed text-slate-600">
+          Port de Sainte-Rose<br />
+          Cabane violette
+        </p>
+
+        <div class="overflow-hidden rounded-xl border border-slate-900/10 bg-white shadow-2xl shadow-slate-900/10">
+                <iframe
+                  title="Point de départ Alizés Adventure — Port de Sainte-Rose"
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3828.7790965299223!2d-61.69928682445166!3d16.334227684384295!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8c13401c39b1af31%3A0xa6ae29bbdf33b18e!2sAliz%C3%A9s%20Adventure!5e0!3m2!1sfr!2sfr!4v1778078710790!5m2!1sfr!2sfr"
+                  class="h-80 w-full"
+                  style="border:0;"
+                  allowfullscreen
+                  loading="lazy"
+                  referrerpolicy="no-referrer-when-downgrade"
+                ></iframe>
+              </div>
+
+        <a
+          href="https://maps.app.goo.gl/d1yw94CNdaNvrkky8"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="mt-5 inline-flex min-h-11 items-center justify-center rounded-full bg-slate-950 px-5 py-2.5 font-black text-white no-underline transition hover:-translate-y-0.5 hover:bg-teal-700"
+        >
+          Ouvrir dans Google Maps
+        </a>
+      </div>
+
+      
+
+      <div class="rounded-[28px] border border-slate-900/10 bg-white p-6 shadow-2xl shadow-slate-900/10">
+        <p class="mb-2 text-xs font-black uppercase tracking-[0.14em] text-teal-600">
+          Contact
+        </p>
+
+        <h3 class="font-['Baloo_2'] text-3xl font-extrabold leading-none text-slate-950">
+          Infos utiles
+        </h3>
+
+        <p class="mt-4 leading-relaxed text-slate-600">
+          Tél. :
+          <a class="font-bold text-teal-700 underline decoration-teal-500/30 underline-offset-4" href="tel:+590690262051">
+            +590 690 26 20 51
+          </a>
+          <br />
+          Email :
+          <a class="font-bold text-teal-700 underline decoration-teal-500/30 underline-offset-4" href="mailto:alizesadventure@gmail.com">
+            alizesadventure@gmail.com
+          </a>
+        </p>
+      </div>
+
+      <div class="overflow-hidden rounded-[28px] border border-slate-900/10 bg-white shadow-2xl shadow-slate-900/10">
+        <img
+          class="h-full w-full object-cover"
+          src="/images/accueil-depart.webp"
+          alt="Cabane d'accueil Alizés Adventure"
+        />
+      </div>
+
+      <div class="rounded-[28px] bg-teal-600 p-6 text-white shadow-2xl shadow-teal-900/20">
+        <p class="mb-2 text-xs font-black uppercase tracking-[0.14em] text-yellow-300">
+          Conseil
+        </p>
+
+        <h3 class="font-['Baloo_2'] text-3xl font-extrabold leading-none text-white">
+          Réserver avant
+        </h3>
+
+        <p class="mt-4 leading-relaxed text-white/85">
+          Les places sont limitées : 4 bateaux de 4 places. Pour éviter la
+          mauvaise surprise, mieux vaut réserver votre créneau.
+        </p>
+
+        <a
+          href="/reserver#reservation"
+          class="mt-5 inline-flex min-h-11 items-center justify-center rounded-full bg-white px-5 py-2.5 font-black text-slate-950 no-underline transition hover:-translate-y-0.5 hover:bg-yellow-100"
+        >
+          Voir les disponibilités
+        </a>
+      </div>
+    </aside>
+  </section>
+</PageLayout>

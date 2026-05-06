@@ -11,8 +11,11 @@ type Slot = {
 
 type Props = {
   slot?: Slot;
+  adults: number;
+  children: number;
   passengers: number;
   boatsNeeded: number;
+  totalPrice: number;
   canBook: boolean;
 };
 
@@ -28,6 +31,26 @@ function formatDate(date: string) {
     month: "long",
     year: "numeric",
   }).format(parseDateKey(date));
+}
+
+function formatPrice(price: number) {
+  return new Intl.NumberFormat("fr-FR", {
+    style: "currency",
+    currency: "EUR",
+    maximumFractionDigits: 0,
+  }).format(price);
+}
+
+function formatPassengerDetail(adults: number, children: number) {
+  const adultLabel = `${adults} adulte${adults > 1 ? "s" : ""}`;
+
+  if (children <= 0) {
+    return adultLabel;
+  }
+
+  const childLabel = `${children} enfant${children > 1 ? "s" : ""}`;
+
+  return `${adultLabel} et ${childLabel}`;
 }
 
 const inputClass =
@@ -46,8 +69,11 @@ function RequiredText({ children }: { children: ReactNode }) {
 
 export default function BookingForm({
   slot,
+  adults,
+  children,
   passengers,
   boatsNeeded,
+  totalPrice,
   canBook,
 }: Props) {
   return (
@@ -58,7 +84,7 @@ export default function BookingForm({
         alert("Démo : la réservation sera branchée ensuite à Supabase.");
       }}
     >
-      <div className="rounded-3xl bg-slate-950 p-5 text-white sm:p-6 lg:p-7">
+      <div className="rounded-3xl bg-linear-to-br from-teal-950 via-slate-950 to-amber-950 p-5 text-white shadow-2xl shadow-teal-950/30 sm:p-6 lg:p-7">
         <p className="mb-3 text-xs font-black uppercase tracking-[0.14em] text-teal-300">
           Confirmation
         </p>
@@ -90,9 +116,30 @@ export default function BookingForm({
               <p className="mb-1 text-sm font-bold text-white/50">
                 Participants
               </p>
-              <strong className="text-white">
-                {passengers} personne(s) • {boatsNeeded} bateau(x)
+
+              <strong className="block text-white">
+                {formatPassengerDetail(adults, children)}
               </strong>
+
+              <p className="mb-0 mt-1 text-sm font-semibold text-white/60">
+                {passengers} personne{passengers > 1 ? "s" : ""} au total •{" "}
+                {boatsNeeded} bateau{boatsNeeded > 1 ? "x" : ""} nécessaire
+                {boatsNeeded > 1 ? "s" : ""}
+              </p>
+            </div>
+
+            <div className="rounded-2xl border border-teal-300/20 bg-teal-300/5 p-4">
+              <p className="mb-1 text-sm font-bold text-teal-100">
+                Prix à payer au départ
+              </p>
+
+              <strong className="block text-3xl font-black text-white">
+                {formatPrice(totalPrice)}
+              </strong>
+
+              <p className="mb-0 mt-2 text-sm font-semibold text-white/65">
+                Paiement en espèces ou par chèque au départ de l’excursion.
+              </p>
             </div>
           </div>
         ) : (

@@ -1,0 +1,46 @@
+---
+// src/layouts/AdminLayout.astro
+import "../styles/global.css";
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = "Gestion des réservations — Alizés Adventure",
+  description = "Espace de gestion des sorties et réservations Alizés Adventure.",
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="fr" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content={description} />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content={Astro.generator} />
+
+    <title>{title}</title>
+
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body class="bg-slate-50 font-['Inter'] text-slate-700 antialiased">
+    <main class="min-h-screen py-6 md:py-10">
+      <slot />
+    </main>
+
+    <div class="fixed bottom-4 left-1/2 z-999 -translate-x-1/2 rounded-full bg-red-600/80 px-4 py-2 text-center text-xs font-black uppercase tracking-[0.12em] text-white shadow-2xl shadow-slate-950/30 backdrop-blur-md max-sm:bottom-3 max-sm:w-[calc(100%-1.5rem)] max-sm:rounded-2xl">
+      Prototype de démonstration
+    </div>
+  </body>
+</html>

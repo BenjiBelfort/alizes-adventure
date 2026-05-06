@@ -22,6 +22,9 @@ type Slot = {
 };
 
 const BOAT_CAPACITY = 4;
+const MAX_PASSENGERS = 16;
+const ADULT_PRICE = 50;
+const CHILD_PRICE = 30;
 
 const PERIOD_LABEL: Record<Period, string> = {
   morning: "Matin",
@@ -85,6 +88,40 @@ function formatMonth(date: Date) {
 
 function boatsNeeded(passengers: number) {
   return Math.ceil(passengers / BOAT_CAPACITY);
+}
+
+function getMaxChildrenForAdults(adults: number) {
+  return adults * (BOAT_CAPACITY - 1);
+}
+
+function getMaxChildrenAllowed(adults: number) {
+  return Math.min(MAX_PASSENGERS - adults, getMaxChildrenForAdults(adults));
+}
+
+function hasEnoughAdults(adults: number, children: number) {
+  return children <= getMaxChildrenForAdults(adults);
+}
+
+function formatPrice(price: number) {
+  return new Intl.NumberFormat("fr-FR", {
+    style: "currency",
+    currency: "EUR",
+    maximumFractionDigits: 0,
+  }).format(price);
+}
+
+function formatPeople(count: number) {
+  return `${count} personne${count > 1 ? "s" : ""}`;
+}
+
+function formatBoats(count: number) {
+  return `${count} bateau${count > 1 ? "x" : ""}`;
+}
+
+function formatNeededBoatsMessage(needed: number, canBook: boolean) {
+  return `${formatBoats(needed)} nécessaire${
+    needed > 1 ? "s" : ""
+  }. ${canBook ? "Réservation possible." : ""}`;
 }
 
 function getCalendarDays(monthDate: Date): Array<Date | null> {
@@ -167,7 +204,12 @@ export default function BookingCalendar() {
     firstAvailableSlot?.id ?? null
   );
 
-  const [passengers, setPassengers] = useState(2);
+  const [adults, setAdults] = useState(2);
+  const [children, setChildren] = useState(0);
+
+  const totalPassengers = adults + children;
+  const totalPrice = adults * ADULT_PRICE + children * CHILD_PRICE;
+
   const [visibleMonth, setVisibleMonth] = useState(() =>
     firstAvailableDate ? parseDateKey(firstAvailableDate) : new Date()
   );
@@ -183,8 +225,12 @@ export default function BookingCalendar() {
   const selectedSlots = slotsByDate[selectedDate] ?? [];
   const selectedSlot = selectedSlots.find((slot) => slot.id === selectedSlotId);
 
-  const needed = boatsNeeded(passengers);
-  const canBook = selectedSlot ? needed <= selectedSlot.boatsRemaining : false;
+  const needed = boatsNeeded(totalPassengers);
+  const isAdultRatioValid = hasEnoughAdults(adults, children);
+
+  const canBook = selectedSlot
+    ? needed <= selectedSlot.boatsRemaining && isAdultRatioValid
+    : false;
 
   function closeForm() {
     setIsFormOpen(false);
@@ -232,26 +278,82 @@ export default function BookingCalendar() {
     closeForm();
   }
 
-  function decrementPassengers() {
-    setPassengers((value) => Math.max(1, value - 1));
-    closeForm();
-  }
+  function decrementAdults() {
+  setAdults((currentAdults) => {
+    const nextAdults = Math.max(1, currentAdults - 1);
+    const maxChildren = getMaxChildrenAllowed(nextAdults);
 
-  function incrementPassengers() {
-    setPassengers((value) => Math.min(16, value + 1));
-    closeForm();
-  }
+    setChildren((currentChildren) => Math.min(currentChildren, maxChildren));
 
-  function updatePassengers(value: number) {
-    if (Number.isNaN(value)) {
-      setPassengers(1);
-      closeForm();
-      return;
+    return nextAdults;
+  });
+
+  closeForm();
+}
+
+function incrementAdults() {
+  setAdults((currentAdults) => {
+    if (currentAdults + children >= MAX_PASSENGERS) {
+      return currentAdults;
     }
 
-    setPassengers(Math.min(16, Math.max(1, value)));
+    return currentAdults + 1;
+  });
+
+  closeForm();
+}
+
+function updateAdults(value: number) {
+  if (Number.isNaN(value)) {
+    setAdults(1);
+    setChildren((currentChildren) =>
+      Math.min(currentChildren, getMaxChildrenAllowed(1))
+    );
     closeForm();
+    return;
   }
+
+  const maxAdults = Math.max(1, MAX_PASSENGERS - children);
+  const nextAdults = Math.min(maxAdults, Math.max(1, value));
+  const maxChildren = getMaxChildrenAllowed(nextAdults);
+
+  setAdults(nextAdults);
+  setChildren((currentChildren) => Math.min(currentChildren, maxChildren));
+
+  closeForm();
+}
+
+function decrementChildren() {
+  setChildren((value) => Math.max(0, value - 1));
+  closeForm();
+}
+
+function incrementChildren() {
+  setChildren((currentChildren) => {
+    const maxChildren = getMaxChildrenAllowed(adults);
+
+    if (currentChildren >= maxChildren) {
+      return currentChildren;
+    }
+
+    return currentChildren + 1;
+  });
+
+  closeForm();
+}
+
+function updateChildren(value: number) {
+  if (Number.isNaN(value)) {
+    setChildren(0);
+    closeForm();
+    return;
+  }
+
+  const maxChildren = getMaxChildrenAllowed(adults);
+
+  setChildren(Math.min(maxChildren, Math.max(0, value)));
+  closeForm();
+}
 
   return (
     <section className="relative z-30 grid min-w-0 pointer-events-auto gap-6 py-10 md:gap-8 md:py-20">
@@ -266,13 +368,13 @@ export default function BookingCalendar() {
           </h2>
 
           <p className="mt-4 leading-relaxed text-slate-600">
-            Sélectionnez une date, un créneau, puis indiquez le nombre de
-            participants. Ensuite, validez votre demande avec vos informations.
+            Sélectionnez une date, un créneau, puis indiquez le nombre
+            d’adultes et d’enfants. Le système calcule automatiquement les
+            bateaux nécessaires et le prix total.
           </p>
         </div>
 
         <div className="mt-8 grid min-w-0 grid-cols-1 items-start gap-6 xl:grid-cols-[minmax(0,1fr)_390px]">
-          {/* Calendrier */}
           <div className="relative z-30 isolate min-w-0 rounded-3xl border border-slate-900/10 bg-slate-50 p-2 sm:p-4">
             <div className="mb-4 flex items-center justify-between gap-3">
               <button
@@ -414,7 +516,6 @@ export default function BookingCalendar() {
             </div>
           </div>
 
-          {/* Panneau choix */}
           <aside className="relative z-30 rounded-3xl border border-teal-900/10 bg-linear-to-br from-teal-50 via-white to-amber-50 p-4 shadow-xl shadow-slate-900/10 sm:p-6 xl:sticky xl:top-28">
             <p className="mb-3 text-xs font-black uppercase tracking-[0.14em] text-teal-700">
               Votre choix
@@ -503,54 +604,139 @@ export default function BookingCalendar() {
             </div>
 
             <div className="mt-6 rounded-2xl border border-slate-900/10 bg-white p-5 text-slate-950 shadow-sm">
-              <label htmlFor="passengers" className="grid gap-2 font-black">
-                Nombre de personnes
-              </label>
+              <div className="grid gap-5">
+                <div>
+                  <label htmlFor="adults" className="grid gap-2 font-black">
+                    Adultes
+                    <span className="text-sm font-semibold text-slate-500">
+                      50 € par adulte
+                    </span>
+                  </label>
 
-              <div className="mt-3 grid grid-cols-[46px_1fr_46px] gap-2">
-                <button
-                  type="button"
-                  className="cursor-pointer touch-manipulation rounded-xl bg-teal-500 text-2xl font-black text-white transition hover:bg-teal-600"
-                  onClick={decrementPassengers}
-                  aria-label="Retirer une personne"
-                >
-                  −
-                </button>
+                  <div className="mt-3 grid grid-cols-[46px_1fr_46px] gap-2">
+                    <button
+                      type="button"
+                      className="cursor-pointer touch-manipulation rounded-xl bg-teal-500 text-2xl font-black text-white transition hover:bg-teal-600"
+                      onClick={decrementAdults}
+                      aria-label="Retirer un adulte"
+                    >
+                      −
+                    </button>
 
-                <input
-                  id="passengers"
-                  type="number"
-                  min={1}
-                  max={16}
-                  value={passengers}
-                  className="rounded-xl border border-slate-900/10 px-4 py-3 text-center font-semibold text-slate-950"
-                  onChange={(event) => {
-                    updatePassengers(Number(event.target.value));
-                  }}
-                />
+                    <input
+                      id="adults"
+                      type="number"
+                      min={1}
+                      max={MAX_PASSENGERS}
+                      value={adults}
+                      className="rounded-xl border border-slate-900/10 px-4 py-3 text-center font-semibold text-slate-950"
+                      onChange={(event) => {
+                        updateAdults(Number(event.target.value));
+                      }}
+                    />
 
-                <button
-                  type="button"
-                  className="cursor-pointer touch-manipulation rounded-xl bg-teal-500 text-2xl font-black text-white transition hover:bg-teal-600"
-                  onClick={incrementPassengers}
-                  aria-label="Ajouter une personne"
-                >
-                  +
-                </button>
+                    <button
+                      type="button"
+                      className="cursor-pointer touch-manipulation rounded-xl bg-teal-500 text-2xl font-black text-white transition hover:bg-teal-600"
+                      onClick={incrementAdults}
+                      aria-label="Ajouter un adulte"
+                    >
+                      +
+                    </button>
+                  </div>
+
+                  <p className="mb-0 mt-2 text-sm font-semibold text-slate-500">
+                    Maximum {getMaxChildrenAllowed(adults)} enfant
+                    {getMaxChildrenAllowed(adults) > 1 ? "s" : ""} avec {adults} adulte
+                    {adults > 1 ? "s" : ""}.
+                  </p>
+                </div>
+
+                <div>
+                  <label htmlFor="children" className="grid gap-2 font-black">
+                    <span>
+                      Enfants <span className="font-semibold text-slate-600">(moins de 12 ans)</span>
+                    </span>
+                    <span className="text-sm font-semibold text-slate-500">
+                      30 € par enfant
+                    </span>
+                  </label>
+
+                  <div className="mt-3 grid grid-cols-[46px_1fr_46px] gap-2">
+                    <button
+                      type="button"
+                      className="cursor-pointer touch-manipulation rounded-xl bg-teal-500 text-2xl font-black text-white transition hover:bg-teal-600"
+                      onClick={decrementChildren}
+                      aria-label="Retirer un enfant"
+                    >
+                      −
+                    </button>
+
+                    <input
+                      id="children"
+                      type="number"
+                      min={0}
+                      max={getMaxChildrenAllowed(adults)}
+                      value={children}
+                      className="rounded-xl border border-slate-900/10 px-4 py-3 text-center font-semibold text-slate-950"
+                      onChange={(event) => {
+                        updateChildren(Number(event.target.value));
+                      }}
+                    />
+
+                    <button
+                      type="button"
+                      className="cursor-pointer touch-manipulation rounded-xl bg-teal-500 text-2xl font-black text-white transition hover:bg-teal-600"
+                      onClick={incrementChildren}
+                      aria-label="Ajouter un enfant"
+                    >
+                      +
+                    </button>
+                  </div>
+                </div>
               </div>
 
-              <p
-                className={[
-                  "mb-0 mt-4 font-black",
-                  canBook ? "text-teal-700" : "text-red-700",
-                ].join(" ")}
-              >
-                {selectedSlot
-                  ? canBook
-                    ? `${needed} bateau(x) nécessaire(s). Réservation possible.`
-                    : `${needed} bateau(x) nécessaire(s), mais seulement ${selectedSlot.boatsRemaining} disponible(s).`
-                  : "Aucun créneau sélectionné."}
-              </p>
+              <div className="mt-5 rounded-2xl bg-slate-50 p-4">
+                <p className="mb-1 text-sm font-bold text-slate-500">
+                  Total participants
+                </p>
+
+                <strong className="block text-xl font-black text-slate-950">
+                  {formatPeople(totalPassengers)}
+                </strong>
+
+                <p
+                  className={[
+                    "mb-0 mt-3 font-black",
+                    canBook ? "text-teal-700" : "text-red-700",
+                  ].join(" ")}
+                >
+                  {selectedSlot
+                    ? canBook
+                      ? formatNeededBoatsMessage(needed, canBook)
+                      : `${formatBoats(needed)} nécessaire${
+                          needed > 1 ? "s" : ""
+                        }, mais seulement ${formatBoats(
+                          selectedSlot.boatsRemaining
+                        )} disponible${selectedSlot.boatsRemaining > 1 ? "s" : ""}.`
+                    : "Aucun créneau sélectionné."}
+                </p>
+              </div>
+
+              <div className="mt-4 rounded-2xl border border-teal-500/20 bg-teal-50 p-4">
+                <p className="mb-1 text-sm font-black uppercase tracking-[0.12em] text-teal-700">
+                  Prix total
+                </p>
+
+                <strong className="block text-3xl font-black text-slate-950">
+                  {formatPrice(totalPrice)}
+                </strong>
+
+                <p className="mb-0 mt-2 text-sm font-semibold text-slate-600">
+                  Paiement sur place au départ de l’excursion, en espèces ou par
+                  chèque.
+                </p>
+              </div>
             </div>
 
             <button
@@ -564,7 +750,9 @@ export default function BookingCalendar() {
 
             {!canBook && (
               <p className="mb-0 mt-3 text-sm font-semibold text-slate-500">
-                Ce créneau ne peut pas accueillir ce nombre de personnes.
+                {!isAdultRatioValid
+                  ? "Il faut au minimum 1 adulte par bateau."
+                  : "Ce créneau ne peut pas accueillir ce nombre de personnes."}
               </p>
             )}
           </aside>
@@ -575,8 +763,11 @@ export default function BookingCalendar() {
         <div ref={formRef} className="scroll-mt-28">
           <BookingForm
             slot={selectedSlot}
-            passengers={passengers}
+            adults={adults}
+            children={children}
+            passengers={totalPassengers}
             boatsNeeded={needed}
+            totalPrice={totalPrice}
             canBook={canBook}
           />
         </div>

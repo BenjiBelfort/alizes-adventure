@@ -1,15 +1,12 @@
 ---
-import PageLayout from "../layouts/PageLayout.astro";
-import AdminReservations from "../components/AdminReservations";
+// src/pages/admin-reservations.astro
+import AdminLayout from "../layouts/AdminLayout.astro";
+import AdminDashboard from "../components/AdminDashboard";
 ---
 
-<PageLayout
-  title="Admin réservations — Alizés Adventure"
-  description="Prototype d’administration des réservations Alizés Adventure."
-  showHero={false}
-  wide
+<AdminLayout
+  title="Gestion des réservations — Alizés Adventure"
+  description="Espace de gestion des sorties et réservations Alizés Adventure."
 >
-  <section class="min-h-screen bg-slate-50 py-8 text-slate-950 md:py-20">
-    <AdminReservations client:load />
-  </section>
-</PageLayout>
+  <AdminDashboard client:load />
+</AdminLayout>

@@ -30,6 +30,18 @@ const year = new Date().getFullYear();
   </div>
 
   <div class="border-t border-white/10 px-4 py-5 text-center text-sm">
-    © {year} Alizés Adventure. Tous droits réservés.
+    <div class="mx-auto flex w-[min(calc(100%-2rem),1120px)] flex-wrap items-center justify-center gap-x-4 gap-y-2">
+      <span>© {year} Alizés Adventure. Tous droits réservés.</span>
+
+      <a class="font-bold text-white no-underline hover:text-yellow-300" href="/mentions-legales">
+        Mentions légales
+      </a>
+
+      <span class="text-white/25">•</span>
+
+      <a class="font-bold text-white no-underline hover:text-yellow-300" href="/politique-confidentialite">
+        Politique de confidentialité
+      </a>
+    </div>
   </div>
 </footer>

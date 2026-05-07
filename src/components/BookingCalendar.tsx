@@ -655,7 +655,7 @@ function updateChildren(value: number) {
                 <div>
                   <label htmlFor="children" className="grid gap-2 font-black">
                     <span>
-                      Enfants <span className="font-semibold text-slate-600">(moins de 12 ans)</span>
+                      Enfants <span className="font-semibold text-slate-600">(moins de 10 ans)</span>
                     </span>
                     <span className="text-sm font-semibold text-slate-500">
                       30 € par enfant

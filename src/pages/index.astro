@@ -1,6 +1,5 @@
 ---
-import BaseLayout from "../layouts/BaseLayout.astro";
-import Hero from "../components/Hero.astro";
+import PageLayout from "../layouts/PageLayout.astro";
 import ImageCarousel from "../components/ImageCarousel.astro";
 
 const carouselImages = [
@@ -39,17 +38,13 @@ const carouselImages = [
 ];
 ---
 
-<BaseLayout
+<PageLayout
   title="Alizés Adventure — Excursion mangrove en Guadeloupe"
   description="Excursion guidée en bateau sans permis dans la mangrove de Sainte-Rose, le lagon du Grand Cul-de-Sac Marin et les îlets de Guadeloupe."
+  heroTitle="Excursion dans la mangrove"
+  heroSubtitle="Soyez acteur de votre sortie : pilotez votre bateau sans permis et suivez le guide au cœur du Grand Cul-de-Sac Marin."
+  heroImage="/images/suivez-le-guide.webp"
 >
-  <Hero
-    title="Excursion dans la mangrove"
-    subtitle="Soyez acteur de votre sortie : pilotez votre bateau sans permis et suivez le guide au cœur du Grand Cul-de-Sac Marin."
-    image="/images/suivez-le-guide.webp"
-  />
-
-  <main class="mx-auto w-[min(calc(100%-2rem),1120px)]">
     <!-- Intro -->
     <section class="mx-auto max-w-3xl py-20 text-center lg:py-28">
       <p class="mb-3 text-xs font-black uppercase tracking-[0.14em] text-teal-600">
@@ -381,5 +376,5 @@ const carouselImages = [
         Réserver maintenant
       </a>
     </section>
-  </main>
-</BaseLayout>
+
+</PageLayout>
